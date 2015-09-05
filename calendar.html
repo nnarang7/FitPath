@@ -81,6 +81,7 @@
               			eventTimeStart.push(whenS);
               			eventTimeEnd.push(whenE);
               			eventLocations.push(location);
+              			calculateTimes();
             		}
 				}
 				else {
@@ -94,7 +95,7 @@
 			pre.appendChild(textContent);
 		}
 		function calculateTimes() {
-			for(int i = 0; i < eventTimeStart.length - 1; i++) {
+			for(int i = 0; i < (eventTimeStart.length - 1); i++) {
 				timeDifference.push(dateTimeDifference(eventTimeEnd[i], eventTimeStart[i + 1]));
 			}
 		}
