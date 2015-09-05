@@ -1,0 +1,107 @@
+
+ <!-- singleEvent 
+//0: Event Name
+//1: Event address 
+//2: starting time
+//3: ending time 
+//4 locations(long.lat)-->
+
+<script>
+  
+	//Getting infomation of testEvents from Natasha 
+  var testEvents = [["aaa","Empire State Building","8:00am","9:00am",{lat: 0, lng: 131.044}],
+    ["bbb","Statue of Liberty","10:00am","11:00am",{lat: 30, lng: 81.044}],
+    ["ccc","Fifth Avenue","8:00pm","9:00pm",{lat: 0, lng: 60.044}]];
+    var eventNum = testEvents.length;
+</script>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
+    <script type="text/javascript" src="js/send-email.js"></script>
+    <script type="text/javascript" src="js/params.js"></script>
+    <script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Routex Map</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id = "emaildiv">
+      <button onclick="sendTheMail(); return false;">Send the Mail</button>
+      <pre id="response"></pre>
+    </div>
+    <div id="map"></div>
+ 
+
+<script>
+// This example displays a marker at the center of Australia.
+// When the user clicks the marker, an info window opens.
+ //<button id="emailButton" onclick="sendEmail()">Send to me Email</button>
+
+function initMap() {
+  var i;
+  var infowindows = new Array(eventNum);
+  var locations = new Array(eventNum);
+  var contentStrings = new Array(eventNum);
+  var markers = new Array(eventNum);
+  var centerLoc = testEvents[0][4];
+  //create empty LatLngBounds object for autocentering
+  var bounds = new google.maps.LatLngBounds();
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: centerLoc
+  });
+  google.maps.event.trigger(map, 'resize');
+  //Create the markers and contentStrings for the infowindow
+  for (i = 0; i < eventNum; i++)
+  {
+    locations[i] = testEvents[i][4];
+    var order = i + 1;
+    contentStrings[i] = 'Event ' + order + ':  ' + testEvents[i][0] + '<br>' 
+    + 'Address:  ' + testEvents[i][1] + '<br>';
+    contentStrings[i] += 'From ' + testEvents[i][2] + ' to ' + testEvents[i][3];
+    console.log(contentStrings[i]);
+    markers[i] = new google.maps.Marker
+    ({
+      position: locations[i],
+      map: map,
+      title: 'Location' + i
+    });
+  }
+  //Create info window when onclick
+  var infowindow = null;
+  var infowindow = new google.maps.InfoWindow()
+  for (i = 0; i < eventNum; i++)
+  {
+    var content = contentStrings[i];
+    var marker = markers[i];
+      //extend the bounds to include each marker's position
+    bounds.extend(marker.position);
+    google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+          return function() {
+             infowindow.setContent(content);
+             infowindow.open(map,marker);
+          };
+      })(marker,content,infowindow)); 
+  }
+  //now fit the map to the newly inclusive bounds
+  map.fitBounds(bounds);
+}
+  </script>
+  <script async defer
+        src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap">
+  </script>
+  </body>
+</html>
