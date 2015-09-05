@@ -12,7 +12,7 @@
 			gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
 		}
 		function handleAuthResult(authResult) {
-	        var authorizeDiv = document.getElementById('authorize-button');
+	        var authorizeButton = document.getElementById('authorize-button');
 	        if (authResult && !authResult.error) {
 	          // Hide auth UI, then load client library.
 	          authorizeButton.visible = "false";
