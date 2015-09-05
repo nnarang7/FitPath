@@ -111,6 +111,9 @@
 		Write conditionals for date vs dateTime inputs
 		*/
 		function dateTimeDifference(date1, date2) {
+			if (!dateTime) {
+				
+			}
 			var date1_ms = date1.getTime();
 			var date2_ms = date2.getTime();
 			var difference_ms = date2_ms - date1_ms;
