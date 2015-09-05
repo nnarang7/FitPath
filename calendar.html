@@ -100,8 +100,8 @@
 			pre.appendChild(textContent);
 		}
 		function calculateTimes() {
-			for(i = 0; i < (eventTimeStart.length - 1); i++) {
-				timeDifference.push(dateTimeDifference(eventTimeEnd[i], eventTimeStart[i + 1]));
+			for(i = 0; i < (eventTimesStart.length - 1); i++) {
+				timeDifferences.push(dateTimeDifference(eventTimesEnd[i], eventTimesStart[i + 1]));
 			}
 		}
 		function dateTimeDifference(date1, date2) {
