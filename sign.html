@@ -13,14 +13,14 @@
     </ul>
 </div> 
 <div id = buttons>
-    <h1>Sign in with Google now!</h1>
+    <h1 id ="intro1" >Sign in with Google now!</h1>
     <button type = "button" name="sign_in" id = "user_button" class="button">Sign in</button>
-    <h1>Or Continue As Guest!</h1>
+    <h1 id = "intro2" >Or Continue As Guest!</h1>
     <button type = "button" name="guest" id = "guest_button" class = "button" onclick ="openForm()" >Guest</button>  
 </div>
 
-<form id = "guestForm">
-    <fieldset>
+<form id = "formId">
+    <fieldset id = "formField">
         <label>
         Location: 
             <input type = "text" name = "username">
@@ -38,18 +38,33 @@
             <input type = "time" name = "endTime">
         </label>
     </fieldset>       
-    
 </form>
         
+<form id ="buttonId">
+    <fieldset id = "butts">
+        <input type ="submit" name = "Submit" value = "Let's Explore!">
+        <input type = "button" name = "newLoca" value = "Add New Location" onclick = "newButton()">
+    </fieldset>
+</form>       
         
-<script>
-button.addEventListener("click", openForm);
+<script type = "text/javascript">
 function openForm(){
-    form.getElementById("guestForm").style.visibility = "visible";
+    document.getElementById("formId").style.visibility = "visible";
+    document.getElementById("buttonId").style.visibility="visible"; 
+    document.getElementById("intro1").style.visibility ="hidden"; 
+    document.getElementById("intro2").style.visibility = "hidden"; 
+    document.getElementById("user_button").style.visibility = "hidden"; 
+    document.getElementById("guest_button").style.visibility = "hidden"; 
+}
+    
+function newButton(){
+    var oldForm = document.getElementById("formField");
+    var newForm = oldForm.cloneNode(true); 
+    newForm.id = '' ;
+    document.getElementById("formId").appendChild(newForm); 
 }
 </script>
 
     
 </body>
 </html>
-
