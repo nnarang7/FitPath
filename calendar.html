@@ -68,11 +68,14 @@
 					for (i = 0; i < events.length; i++) {
               			var event = events[i];
               			var whenS = event.start.dateTime;
-              			var whenE = event.start.dateTime;
+              			var whenE = event.end.dateTime;
               			var location = event.location;
             
               			if (!whenS) {
                 			whenS = event.start.date;
+              			}
+              			if (!whenE) {
+                			whenE = event.end.date;
               			}
               			appendPre(event.summary + ' (' + whenS + ')');
               			appendPre(event.summary + ' (' + whenE + ')');
@@ -104,6 +107,9 @@
 				timeDifferences.push(dateTimeDifference(eventTimesEnd[i], eventTimesStart[i + 1]));
 			}
 		}
+		/*
+		Write conditionals for date vs dateTime inputs
+		*/
 		function dateTimeDifference(date1, date2) {
 			var date1_ms = date1.getTime();
 			var date2_ms = date2.getTime();
