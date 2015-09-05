@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="sign.css">
+</head>
+    <body>
+<div id="nav-wrapper">
+    <ul class = "right nav-bar">
+        <li><a id="logo">RouteEx</a></li>
+        <li><a id="options" href = "about.html">About</a></li>
+        <li><a id="options" href = "works.html">How it Works</a></li>
+        <li><a id="options" href = "sign.html">Sign Up/Log in</a></li>
+    </ul>
+</div> 
+<div id = buttons>
+    <h1>Sign in with Google now!</h1>
+    <button type = "button" name="sign_in" id = "user_button" class="button">Sign in</button>
+    <h1>Or Continue As Guest!</h1>
+    <button type = "button" name="guest" id = "guest_button" class = "button" onclick ="openForm()" >Guest</button>  
+</div>
+
+<form id = "guestForm">
+    <fieldset>
+        <label>
+        Location: 
+            <input type = "text" name = "username">
+        </label>
+        <label>
+        Date:
+            <input type = "date" name="Date">
+        </label>
+        <label>
+        Start Time:
+            <input type = "time" name = "startTime">
+        </label>
+        <label>
+        End Time:
+            <input type = "time" name = "endTime">
+        </label>
+    </fieldset>       
+    
+</form>
+        
+        
+<script>
+button.addEventListener("click", openForm);
+function openForm(){
+    form.getElementById("guestForm").style.visibility = "visible";
+}
+</script>
+
+    
+</body>
+</html>
+
