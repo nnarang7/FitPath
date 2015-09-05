@@ -1,3 +1,14 @@
+	<!-- Input your daily activity goals (in miles) --> 
+	<!-- Choose Date -->
+	<!-- Log in to gmail-->
+	<!-- Add my favorite locations (hard coding it for now) -->
+	<!-- Access Calendar and Return values -->
+	<!-- Display the calendar for a specific date-->
+	<!-- Algorithms to generate a suggested route that satisfies the goal (in list) -->
+	<!-- Generate a map for the suggested route -->
+	<!-- Send an email with list and map -->
+
+
 # FitPath
 PennApps Fall 2015 Project
 //The indented features are advanced features
