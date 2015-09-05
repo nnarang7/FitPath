@@ -58,6 +58,8 @@
 		var eventTimesStart = [];
 		var eventTimesEnd = [];
 		var timeDifferences = [];
+		var dateBegin = new Date(2015, 9, 5, 0, 0, 0);
+		var dateEnd = new Date(2015, 9, 6, 0, 0, 0);
 		function checkAuth() {
 			gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
 		}
@@ -99,8 +101,8 @@
 		function listUpcomingEvents() {
 			var request = gapi.client.calendar.events.list( {
 				'calendarId': 'primary',
-				'timeMin': (new Date()).toISOString(),
-				'timeMax': (new Date()).toISOString(),
+				'timeMin': (dateBegin).toISOString(),
+				'timeMax': (dateEnd).toISOString(),
 				'showDeleted': false,
 				'singleEvents': true,
 				'maxResults': 10,
