@@ -111,8 +111,8 @@
 			    var date2_ms = date2.getTime();
 			    var difference_ms = date2_ms - date1_ms;
 			    //Returns number of minutes
-			    console.log(Math.floor(Math.floor(difference_ms % 60) % 60));
-			    return Math.floor(Math.floor(difference_ms % 60) % 60);	
+			    console.log(Math.floor(Math.floor(difference_ms / 60) / 60));
+			    return Math.floor(Math.floor(difference_ms / 60) / 60);	
 			}
 			else {
 			    var d1 = new Date(date1);
@@ -122,9 +122,9 @@
 			    console.log("Time 1: " + date1_ms);
 			    console.log("Time 2: " + date2_ms);
 			    var difference_ms = date2_ms - date1_ms;
-			    console.log(Math.floor(Math.floor(difference_ms % 60) % 60));
+			    console.log(Math.floor(Math.floor(difference_ms / 60) / 60));
 			    //Returns number of minutes
-			    return Math.floor(Math.floor(difference_ms % 60) % 60);
+			    return Math.floor(Math.floor(difference_ms / 60) / 60);
 			}
 		}
 
