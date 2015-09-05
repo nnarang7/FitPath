@@ -90,10 +90,6 @@
               			eventTimesEnd.push(whenE);
               			eventLocations.push(location);
               			calculateTimes();
-              			
-              			for (i = 0; i < timeDifferences.length; i++) {
-              				console.log(timeDifferences[i]);
-              			}
             		}
 				}
 				else {
@@ -120,6 +116,7 @@
 			    var date2_ms = date2.getTime();
 			    var difference_ms = date2_ms - date1_ms;
 			    //Returns number of minutes
+			    console.log(Math.floor(Math.floor(difference_ms % 60) % 60));
 			    return Math.floor(Math.floor(difference_ms % 60) % 60);	
 			}
 			else {
@@ -128,6 +125,7 @@
 			    var date1_ms = d1.getTime();
 			    var date2_ms = d2.getTime();
 			    var difference_ms = date2_ms - date1_ms;
+			    console.log(Math.floor(Math.floor(difference_ms % 60) % 60));
 			    //Returns number of minutes
 			    return Math.floor(Math.floor(difference_ms % 60) % 60);
 			}
