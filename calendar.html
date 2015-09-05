@@ -4,10 +4,10 @@
 	<script language="javascript">
 		var clientId = '336948298289-fh0p7ls0sj5qs15qtu2d6tgav2dgsm0d.apps.googleusercontent.com';
 		var scopes = 'https://www.googleapis.com/auth/calendar.readonly';
-		var eventLocations = {};
-		var eventTimesStart = {};
-		var eventTimesEnd = {};
-		var timeDifferences = {};
+		var eventLocations = [];
+		var eventTimesStart = [];
+		var eventTimesEnd = [];
+		var timeDifferences = [];
 		function checkAuth() {
 			gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
 		}
