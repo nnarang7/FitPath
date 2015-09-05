@@ -119,8 +119,8 @@
 			    return Math.floor(Math.floor(difference_ms % 60) % 60);	
 			}*/
 			//else {
-			    var d1 = Date.parse(date1);
-			    var d2 = Date.parse(date2);
+			    var d1 = new Date(date1);
+			    var d2 = new Date(date2);
 			    var date1_ms = d1.getTime();
 			    var date2_ms = d2.getTime();
 			    var difference_ms = date2_ms - date1_ms;
