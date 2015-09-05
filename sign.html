@@ -103,8 +103,8 @@
 			console.log(dateEnd);
 			var request = gapi.client.calendar.events.list( {
 				'calendarId': 'primary',
-				'timeMin': (dateBegin).getTime(),
-				'timeMax': (dateEnd).getTime(),
+				'timeMin': dateBegin.toISOString(),
+				'timeMax': dateEnd.toISOString(),
 				'showDeleted': false,
 				'singleEvents': true,
 				'maxResults': 10,
