@@ -1,0 +1,55 @@
+body{
+    font-family:Verdana; 
+    background-color: #90caf9;
+}
+
+ul {
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+    text-align: left;
+}
+
+li{
+    display: inline;
+}
+
+#nav-wrapper a:link {
+    text-decoration: none; 
+}
+
+#options:link, #options:visited {
+    width: 200px;
+    color:white;
+    text-align: left;
+    padding: 4px;
+    font-size: 20px;
+}
+
+#options:hover, #options:active{
+    color:#bbdefb; 
+}
+
+#logo{
+    color: #64b5f6;
+    font-size: 50px; 
+    font-weight: bold;
+}
+
+h1{
+    text-align: center;
+    font-size: 50px; 
+    color: white; 
+}
+
+h2{
+    text-align: center;
+    font-size: 35px;
+    color: blue; 
+}
+
+h3{
+    text-align: center;
+    font-size: 20px; '
+    color: #42a5f5;
+}
