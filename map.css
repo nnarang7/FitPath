@@ -1,11 +1,9 @@
 #list {
   float: left;
+  display: inline-block;
 }
 
 #map {
   float: right;
-}
-
-#boxes {
   display: inline-block;
 }
