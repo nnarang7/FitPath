@@ -458,7 +458,7 @@ function buildResponseFor(i) {
 			    	console.log(endTimeMS);
 			    	var endTime = new Date(endTimeMS);
 			    	
-			    	var infoToAdd = [destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i]), endTime, numMiles];
+			    	var infoToAdd = [endTime, numMiles];
 			    	console.log("adding this info");
 			    	console.log(infoToAdd);
 			    	destOrdering.push(infoToAdd);			
@@ -486,6 +486,9 @@ function initFirstMap(destArray, timeArray) {
 	  }, buildResponseFor(i));
 	//console.log(destOrdering);
 	}
+	destOrdering.split(i, 1, [destOrdering[i][0], destOrdering[i][1], destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i])]);
+	console.log([destOrdering[i][0], destOrdering[i][1], destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i])]);
+	console.log(destOrdering);
 	    addFavorites(totalMileage, favoriteLocations);
 	    updateArrayFormat();	
 	window.open('map.html', '_self');
