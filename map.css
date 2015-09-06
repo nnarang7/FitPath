@@ -5,3 +5,7 @@
 #map {
   float: right;
 }
+
+#boxes {
+  display: inline-block;
+}
