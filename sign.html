@@ -102,6 +102,15 @@
 			gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
 			return false;
 		}
+		
+		function popitup(url) {
+   			newwindow = window.open(url, 'name', 'height=200,width=150');
+   			if (window.focus) {
+				 newwindow.focus();
+   			}
+   			return false;
+ 		}
+ 		
 		function loadCalendarApi() {
 			gapi.client.load('calendar', 'v3', listUpcomingEvents);
 		}
@@ -326,6 +335,7 @@ function initFirstMap(destArray, timeArray) {
 	console.log(JSON.stringify(updatedFormat));
 	//localStorage["locations"] = JSON.stringify(updatedFormat);
 	window.open('map.html', '_self');
+	popitup('goal_popup.html');
 	//endProcess();
 	//updateArrayFormat();
 	//console.log(destOrdering);
