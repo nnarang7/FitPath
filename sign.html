@@ -185,7 +185,7 @@
 			    var date1_ms = d1.getTime();
 			    var date2_ms = d2.getTime();
 			    console.log("Time 1: " + date1_ms);
-			    console.log("Time 2: " + date2_ms);f
+			    console.log("Time 2: " + date2_ms);
 			    var difference_ms = date2_ms - date1_ms;
 			    console.log(((difference_ms / 1000) / 60));
 			    //Returns number of minutes
@@ -253,7 +253,9 @@ var timeArray = timeDifferences;
 var favoriteLocations = ['Philadelphia City Hall, Philadelphia, PA', '30th Street Station, Philadelphia, PA'];
 //destArray is eventLocations, timeArray is timeDifferences
 function initMap(destArray, timeArray) {
-  var bounds = new google.maps.LatLngBounds;
+	console.log("initializing map");
+	console.log(destArray);
+	console.log(timeArray);
   var markersArray = [];
   //var destArray = ['Wells Fargo Center, Philadelphia, PA', '3901 Locust Walk, Philadelphia, PA'];
 
