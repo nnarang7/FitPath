@@ -475,7 +475,7 @@ function initFirstMap(destArray, timeArray) {
   //var destArray = ['Wells Fargo Center, Philadelphia, PA', '3901 Locust Walk, Philadelphia, PA'];
   var service = new google.maps.DistanceMatrixService;
   var geocoder = new google.maps.Geocoder;
-  for (var i = 0; i < destArray.length - 1; i++) {
+  for (var i = 0; i < eventLocations.length - 1; i++) {
   	console.log("at " + destArray[i]);
   	var currentIndex = i;
 	  service.getDistanceMatrix({
@@ -489,8 +489,8 @@ function initFirstMap(destArray, timeArray) {
 	//console.log(destOrdering);
 	}
 	console.log(destOrdering[i]);
-	destOrdering.splice(i, 1, [(destOrdering[i])[0], (destOrdering[i])[1], destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i])]);
-	console.log([destOrdering[i][0], destOrdering[i][1], destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i])]);
+	destOrdering.splice(i, 1, [(destOrdering[i])[0], (destOrdering[i])[1], eventLocations[i], eventLocations[i], eventLocations[i + 1], new Date(eventTimesStart[i])]);
+	console.log([destOrdering[i][0], destOrdering[i][1], eventLocations[i], eventLocations[i], eventLocations[i + 1], new Date(eventTimesStart[i])]);
 	console.log(destOrdering);
 	    addFavorites(totalMileage, favoriteLocations);
 	    updateArrayFormat();	
