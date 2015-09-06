@@ -112,7 +112,7 @@
 			console.log(date);
 			
 			var dateBegin = new Date(year, month - 1, date, 0, 0, 0);
-			var dateEnd = new Date(year, month - 1, date + 1, 0, 0, 0);
+			var dateEnd = dateBegin.getDate() + 1;
 			
 			console.log(dateBegin);
 			console.log(dateEnd);
