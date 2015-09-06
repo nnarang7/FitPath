@@ -480,6 +480,37 @@ function initFirstMap(destArray, timeArray) {
 	console.log(destOrdering);
 }
 
+function buildResponseFor(i) {
+	return function(response, status) {
+		if (status == google.maps.DistanceMatrixStatus.OK) {
+			var stringDist = response.rows[0].elements[0].distance.text;
+		    	var numMiles = parseFloat((stringDist.split(" "))[0]);
+		    	console.log("just added " + numMiles + " miles");
+		    	totalMileage += numMiles;
+		    	//console.log("CURRENT INDEX " + currentIndex);
+		    	//console.log(destArray[currentIndex]);
+		    	var minutesToAdd = response.rows[0].elements[0].duration.text.split(" ");
+		    	console.log(minutesToAdd);
+		    	var minutesToAddNums = 0;
+		    	if (minutesToAdd.length === 2) {
+		    		minutesToAddNums = parseInt(minutesToAdd[0]);
+		    	} else if (minutesToAdd.length === 4) {
+		    		minutesToAddNums += 60 * parseInt(minutesToAdd[0]);
+		    		minutesToAddNums += parseInt(minutesToAdd[2]);
+		    	}
+		    	var endTimeMS = (new Date(eventTimesStart[i])).getTime() + minutesToAddNums * 60 * 1000;
+		    	console.log(endTimeMS);
+		    	var endTime = new Date(endTimeMS);
+		    	
+		    	var infoToAdd = [origin, origin, destination, new Date(eventTimesStart[m]), endTime, numMiles];
+		    	console.log("adding this info");
+		    	console.log(infoToAdd);
+		    	destOrdering.push(infoToAdd);
+		    	console.log(destOrdering);	
+		}
+	}
+}
+
 function callServiceDistance(origin, destination, m) {
 	console.log(origin);
 	console.log(destination);
@@ -492,41 +523,8 @@ function callServiceDistance(origin, destination, m) {
 	    unitSystem: google.maps.UnitSystem.IMPERIAL,
 	    avoidHighways: false,
 	    avoidTolls: false
-	  }, function(response, status) {
-	  	console.log("in response and status");
-	    if (status !== google.maps.DistanceMatrixStatus.OK) {
-	    	console.log("something failed");
-	      alert('Error was: ' + status);
-	    } else {
-	    	console.log("in this part of the function");
-	    	var stringDist = response.rows[0].elements[0].distance.text;
-	    	var numMiles = parseFloat((stringDist.split(" "))[0]);
-	    	console.log("just added " + numMiles + " miles");
-	    	totalMileage += numMiles;
-	    	//console.log("CURRENT INDEX " + currentIndex);
-	    	//console.log(destArray[currentIndex]);
-	    	var minutesToAdd = response.rows[0].elements[0].duration.text.split(" ");
-	    	console.log(minutesToAdd);
-	    	var minutesToAddNums = 0;
-	    	if (minutesToAdd.length === 2) {
-	    		minutesToAddNums = parseInt(minutesToAdd[0]);
-	    	} else if (minutesToAdd.length === 4) {
-	    		minutesToAddNums += 60 * parseInt(minutesToAdd[0]);
-	    		minutesToAddNums += parseInt(minutesToAdd[2]);
-	    	}
-	    	var endTimeMS = (new Date(eventTimesStart[i])).getTime() + minutesToAddNums * 60 * 1000;
-	    	console.log(endTimeMS);
-	    	var endTime = new Date(endTimeMS);
-	    	
-	    	var infoToAdd = [origin, origin, destination, new Date(eventTimesStart[m]), endTime, numMiles];
-	    	console.log("adding this info");
-	    	console.log(infoToAdd);
-	    	destOrdering.push(infoToAdd);
-	    	console.log(destOrdering);
-	    }
-	    
-	  });	
-}
+	  }, buildResponseFor(m));	
+	}
 
 function updateArrayFormat() {
 	console.log("now updating format");
