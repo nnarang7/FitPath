@@ -461,6 +461,7 @@ function addFavorites(startingMileage, favoriteLocations) {
 	    		//destOrdering.splice(maxDestPointB, 0, newInfoToAdd); 
 	    		   	
 	    	console.log(destOrdering);
+	    	updateDateFormat();
 	    	totalMileage += milesToAdd;
 	    	console.log(favoriteLocations.length);
 	    	if (totalMileage < goalMileage && favoriteLocations.length !== 0) {
