@@ -7,35 +7,23 @@
 </head>
     <body>
         
-<div id="nav-wrapper">
-    <ul class = "right nav-bar">
-        <li><a id="logo">RouteEx</a></li>
-        <li><a id="options" href = "about.html">About</a></li>
-        <li><a id="options" href = "index.html">How it Works</a></li>
-        <li><a id="options" href = "sign.html">Sign Up/Log in</a></li>
-    </ul>
+ <pre id = "output"></pre>
+<div id="header">
+    <h1 id = "logo"><a href = "index.html">RouteEx</a></h1>
+    <h2 id ="catchphrase">Exercise. Explore. Experience.</h2>
 </div> 
-<div class="nav-wrapper">
-<h1 id ="intro">Pick a date!</h1>	
-    <input type = "date" name ="date">
-</div>
-
-<div id = buttons>
-    <h1 id ="intro1" >Sign in with Google now!</h1>
-    <button type = "button" name="sign_in" id = "authorize-button" class="button" onclick = "handleAuthClick(event)" >Sign in</button>
-    <h1 id = "intro2" >Or Continue As Guest!</h1>
-    <button type = "button" name="guest" id = "guest_button" class = "button" onclick ="openForm()" >Guest</button>  
-</div>
-
-<form id = "formId">
-    <fieldset id = "formField" class="formLine">
+   
+        
+<div id = "goal">
+    <h3 id = "goal_header">Start by setting a goal for the day!</h3>
+    <input type = "text" id = "goal_txt" name = "goal" placeholder = "goal in miles">
+    <input type="submit" id = "submit_goal" name = "submit" value = "Set Goal!" onclick = "addDate(this)">
+    
+    <form id = "formId">
+    <fieldset id = "formField">
         <label>
         Location: 
-            <input type = "text" name = "username">
-        </label>
-        <label>
-        	Date:
-        	<input type = "date" name = "date">
+            <input type = "text" name = "location">
         </label>
         <label>
         Start Time:
@@ -50,10 +38,175 @@
         
 <form id ="buttonId">
     <fieldset id = "butts">
-        <input type ="button" name = "Submit" value = "Let's Explore!" onclick="transferInfo()">
+        <input type ="submit" name = "Submit" value = "Let's Explore!">
         <input type = "button" name = "newLoca" value = "Add New Location" onclick = "newButton()">
     </fieldset>
-</form>       
+</form>     
+
+ <script type = "text/javascript">
+        var goal = 0; 
+        
+        function addDate(field){
+            var date_head = document.createElement("h3"); 
+            var new_date=document.createElement("input"); 
+            new_date.setAttribute('id', "date"); 
+            new_date.setAttribute('type', "date");
+            var txt = document.createTextNode("Pick a date:         "); 
+            date_head.appendChild(txt);  
+            date_head.setAttribute('id', "date_head"); 
+            new_date.setAttribute('onchange',"viewOptions()");
+            document.getElementById("goal").appendChild(date_head); 
+            date_head.appendChild(new_date); 
+            
+            goal = document.getElementById("goal_txt").value; 
+            document.getElementById("goal_header").innerHTML= "Your goal is " + goal + " miles!"; 
+            
+            var par = document.getElementById("goal"); 
+            var child1 = document.getElementById("goal_txt"); 
+            var child2 = document.getElementById("submit_goal"); 
+            par.removeChild(child1);
+            par.removeChild(child2);
+        }
+        
+        function viewOptions(){       
+            var par = document.getElementById("goal"); 
+            
+            var goog = document.createElement("h3"); 
+            var goog_head = document.createElement("h3"); 
+            goog_head.setAttribute('id', "goog_head"); 
+            var goog_txt = document.createTextNode("Sign in with Google!"); 
+            par.appendChild(goog); 
+            par.appendChild(goog_head); 
+            goog_head.appendChild(goog_txt); 
+           
+            var goog_butt = document.createElement("button"); 
+            goog_butt.setAttribute('name', "sign_in");
+            goog_butt.setAttribute('id', "authorize-button"); 
+            goog_butt.setAttribute('class', "button"); 
+            goog_butt.setAttribute('onclick', "handleAuthClick(event)"); 
+            var goog_butt_txt = document.createTextNode("Sign in"); 
+            goog_butt.appendChild(goog_butt_txt); 
+            par.appendChild(goog_butt);
+            
+            var guest = document.createElement("h3"); 
+            var guest_head = document.createElement("h3");
+            guest_head.setAttribute('id', "guest_head"); 
+            var guest_txt = document.createTextNode("Or Continue As Guest!"); 
+            var guest_butt = document.createElement("button")
+            var guest_butt_txt = document.createTextNode("Guest"); 
+            guest_butt.appendChild(guest_butt_txt); 
+            guest_butt.setAttribute('type', "button"); 
+            guest_butt.setAttribute('name', "guest"); 
+            guest_butt.setAttribute('id', "guest_button"); 
+            guest_butt.setAttribute('class', "button"); 
+            guest_butt.setAttribute('onclick', "openForm()"); 
+            
+            guest_head.appendChild(guest_txt); 
+            par.appendChild(guest); 
+            par.appendChild(guest_head); 
+            par.appendChild(guest_butt); 
+            
+            var par2 = document.getElementById("date_head"); 
+            var child1 = document.getElementById("date"); 
+            var child2 = document.getElementById("date_head"); 
+            par2.removeChild(child1); 
+            par.removeChild(child2); 
+        }
+        
+        function openForm(){
+            document.getElementById("formId").style.visibility = "visible";
+            document.getElementById("buttonId").style.visibility="visible"; 
+            //document.getElementById("intro1").style.visibility ="hidden"; 
+            //document.getElementById("intro2").style.visibility = "hidden"; 
+            document.getElementById("authorize-button").style.visibility = "hidden"; 
+            document.getElementById("guest_button").style.visibility = "hidden"; 
+        
+//            var par = document.getElementById("goal"); 
+//            
+//            var form = document.createElement("form"); 
+//            form.setAttribute('id', "formId"); 
+//            par.appendChild(form); 
+//            
+//            var formField = document.createElement("fieldset"); 
+//            formField.setAttribute('id', "formField"); 
+//            form.appendChild(formField);
+//            
+//            var lbl_loca = document.createElement("label"); 
+//            var loca_txt = document.createTextNode("Location:"); 
+//            lbl_loca.appendChild(loca_txt); 
+//            form.appendChild(lbl_loca); 
+//            
+////            var input_loca = document.createElement("input"); 
+////            input_loca.setAttribute('type', "text"); 
+////            input_loca.setAttribute('id', "location"); 
+////            lbl_loca.appendChild(input_loca); 
+////            
+////            var lbl_stime = document.createElement("label"); 
+////            var stime_txt = document.createTextNode("Start Time:"); 
+////            lbl_stime.appendChild(stime_txt); 
+////            form.appendChild(lbl_stime); 
+////            
+////            var input_stime = document.createElement("input"); 
+////            input_stime.setAttribute('type', "time"); 
+////            input_stime.setAttribute('id', "start"); 
+////            lbl_stime.appendChild(input_stime); 
+////            
+////            var lbl_etime = document.createElement("label"); 
+////            var etime_txt = document.createTextNode("End Time:"); 
+////            lbl_etime.appendChild(etime_txt); 
+////            form.appendChild(lbl_etime); 
+////            
+////            var input_etime = document.createElement("input"); 
+////            input_etime.setAttribute('type', "time"); 
+////            input_etime.setAttribute('id', "end"); 
+////            lbl_etime.appendChild(input_etime); 
+////            
+////            var buttForm = document.createElement("form"); 
+////            buttForm.setAttribute('id', "buttId"); 
+////            par.appendChild(buttForm); 
+////            
+////            var buttField = document.createElement("fieldset"); 
+////            buttField.setAttribute('id', "buttField");
+////            buttForm.appendChild(buttField); 
+////            
+////            var submit = document.createElement("input");
+////            var submit_txt = document.createTextNode("Let's Explore!"); 
+////            submit.appendChild(submit_txt); 
+////            //-------> submit.appenChild(//call function)
+////            submit.setAttribute('type', "submit"); 
+////            buttField.appendChild(submit); 
+////            
+////            var newLoca = document.createElement("input");
+////            var newLoca_txt = document.createTextNode("Add a New Location"); 
+////            newLoca.setAttribute('type', "button"); 
+////            newLoca.appendChild(newLoca_txt); 
+////            newLoca.setAttribute('onClick', "newButton()"); 
+////            buttField.appendChild(newLoca); 
+//            
+            var goog_hd = document.getElementById("goog_head"); 
+            var goog_bt = document.getElementById("authorize-button")
+            var guest_hd = document.getElementById("guest_head"); 
+            var guest_bt = document.getElementById("guest_button"); 
+            
+            var par = document.getElementById("goal"); 
+            par.removeChild(goog_hd);
+            console.log("removed");
+            par.removeChild(goog_bt); 
+            par.removeChild(guest_hd); 
+            par.removeChild(guest_bt);
+            }
+            
+            
+    function newButton(){
+        var oldForm = document.getElementById("formField");
+        var newForm = oldForm.cloneNode(true); 
+        newForm.id = '';
+        document.getElementById("formId").appendChild(newForm); 
+    }
+        
+    </script>    
+</div>
+
 
 <script src ="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 <script type = "text/javascript">
@@ -220,16 +373,7 @@
 			    return ((difference_ms / 1000) / 60);
 			}
 		}
-    
-//makes form visible to user
-function openForm(){
-    document.getElementById("formId").style.visibility = "visible";
-    document.getElementById("buttonId").style.visibility="visible"; 
-    document.getElementById("intro1").style.visibility ="hidden"; 
-    document.getElementById("intro2").style.visibility = "hidden"; 
-    document.getElementById("authorize-button").style.visibility = "hidden"; 
-    document.getElementById("guest_button").style.visibility = "hidden"; 
-}
+
 
 function getDate() {
 	var fullDate = document.getElementsByTagName('input')[0].value;
