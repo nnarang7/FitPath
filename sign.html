@@ -298,10 +298,10 @@ function initMap(destArray, timeArray) {
 	    	var numMiles = parseFloat((stringDist.split(" "))[0]);
 	    	console.log("just added " + numMiles + " miles");
 	    	totalMileage += numMiles;
-	    	console.log(getLatLng("Wells Fargo Center, Philadelphia, PA"));
+	    //	console.log(getLatLng("Wells Fargo Center, Philadelphia, PA"));
 	    	console.log(destArray[currentIndex]);
-	    	console.log(getLatLng(destArray[currentIndex]));
-	    	console.log(getLatLng(destArray[currentIndex + 1]));
+	    //	console.log(getLatLng(destArray[currentIndex]));
+	    //	console.log(getLatLng(destArray[currentIndex + 1]));
 	    	var infoToAdd = ["Names", destArray[currentIndex], destArray[currentIndex + 1], "starting time", "starting time + " + response.rows[0].elements[0].duration.text, numMiles];
 	    	console.log("adding this info");
 	    	console.log(infoToAdd);
