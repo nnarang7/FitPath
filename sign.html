@@ -291,13 +291,13 @@ function initFirstMap(destArray, timeArray) {
   var service = new google.maps.DistanceMatrixService;
   var geocoder = new google.maps.Geocoder;
 
-  for (var i = 0; i < destArray.length - 1; i++) {
-  	console.log("at " + destArray[i]);
-  	var currentIndex = i;
+  for (m = 0; m < destArray.length - 1; m++) {
+  	console.log("at " + destArray[m]);
+  	var currentIndex = m;
   	console.log(currentIndex);
 	  service.getDistanceMatrix({
-	    origins: [destArray[i]],
-	    destinations: [destArray[i+1]],
+	    origins: [destArray[m]],
+	    destinations: [destArray[m+1]],
 	    travelMode: google.maps.TravelMode.WALKING,
 	    unitSystem: google.maps.UnitSystem.IMPERIAL,
 	    avoidHighways: false,
@@ -325,7 +325,7 @@ function initFirstMap(destArray, timeArray) {
 	    	console.log(endTimeMS);
 	    	var endTime = new Date(endTimeMS);
 	    	
-	    	var infoToAdd = [destArray[currentIndex], destArray[currentIndex], destArray[currentIndex + 1], new Date(eventTimesStart[i]), endTime, numMiles];
+	    	var infoToAdd = [destArray[currentIndex], destArray[currentIndex], destArray[currentIndex + 1], new Date(eventTimesStart[m]), endTime, numMiles];
 	    	console.log("adding this info");
 	    	console.log(infoToAdd);
 	    	destOrdering.push(infoToAdd);
