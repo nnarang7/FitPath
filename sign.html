@@ -170,7 +170,6 @@
 				console.log(timeDifferences);
 				initMap(eventLocations, timeDifferences);				
 			});
-
 			
 		}
 		function appendPre(message) {
@@ -218,7 +217,6 @@ function openForm(){
     document.getElementById("authorize-button").style.visibility = "hidden"; 
     document.getElementById("guest_button").style.visibility = "hidden"; 
 }
-
 function getDate() {
 	var fullDate = document.getElementsByTagName('input')[0].value;
 	var dateSplit = fullDate.split("-");
@@ -226,7 +224,6 @@ function getDate() {
 	month = dateSplit[1];
 	date = dateSplit[2];
 }
-
 //add info for guest accounts
 function transferInfo() {
 	getDate();
@@ -262,14 +259,12 @@ function newButton(){
     newForm.id = '';
     document.getElementById("formId").appendChild(newForm); 
 }
-
 var destOrdering = [];
 var goalMileage = 5.0;
 var totalMileage = 0;
 var timeArray = timeDifferences;
 var favoriteLocations = ['Philadelphia City Hall, Philadelphia, PA', '30th Street Station, Philadelphia, PA'];
 //destArray is eventLocations, timeArray is timeDifferences
-
 function buildResponseFor(i) {
 	return function (response, status) {
 		if (status == google.maps.DistanceMatrixStatus.OK) {
@@ -297,17 +292,14 @@ function buildResponseFor(i) {
 		}
 	}
 }
-
 function initMap(destArray, timeArray) {
 	console.log("initializing map");
 	console.log(destArray);
 	console.log(timeArray);
   var markersArray = [];
   //var destArray = ['Wells Fargo Center, Philadelphia, PA', '3901 Locust Walk, Philadelphia, PA'];
-
   var service = new google.maps.DistanceMatrixService;
   var geocoder = new google.maps.Geocoder;
-
   for (var i = 0; i < destArray.length - 1; i++) {
   	console.log("at " + destArray[i]);
   	var currentIndex = i;
@@ -337,7 +329,6 @@ function initMap(destArray, timeArray) {
 	//functionality to take care of adding in new locations
 	console.log(destOrdering);
 }
-
 function updateArrayFormat() {
 	console.log("now updating format");
 	console.log(destOrdering);
@@ -358,7 +349,6 @@ function updateArrayFormat() {
 	}
 	console.log(updatedFormat);
 }
-
 function addFavorites(startingMileage, favoriteLocations) {
 	console.log("current ordering");
 	console.log(destOrdering);
@@ -374,7 +364,6 @@ function addFavorites(startingMileage, favoriteLocations) {
 		for (var a = 1; a < destOrdering.length; a++) {
 			updatedArray.push(destOrdering[a][2]);
 		}
-
 	//while (totalMileage < goalMileage && favoriteLocations.length !== 0) {
 	  service.getDistanceMatrix({
 	    origins: [currentLocation],
@@ -413,7 +402,6 @@ function addFavorites(startingMileage, favoriteLocations) {
 	    			timeTakenLeave += parseInt(stringTimeSplit[2]);
 	    			console.log(timeTakenLeave);
 	    		}
-
 	    		if (nextDestTimeSplit.length == 2) {
 	    			timeTakenReturn = parseInt(nextDestTimeSplit[0]);
 	    		} else if (nextDestTimeSplit.length == 4) {
@@ -421,7 +409,6 @@ function addFavorites(startingMileage, favoriteLocations) {
 	    			timeTakenReturn += parseInt(nextDestTimeSplit[2]);
 	    		}
 	    		console.log(timeTakenReturn);
-
 	    		if (timeTakenLeave + timeTakenReturn < timeArray[j]) {
 	    			if (oneWayDist + comingBackDist > maxDist) {
 	    				maxDist = oneWayDist + comingBackDist;
