@@ -31,13 +31,17 @@
   
  <div id = "emailContent">
       <div class="goals">Congratulations! We've found a path that can help you reach your goal!</div>
+       <div id = "emaildiv">
+         <form action="demo_form.asp">
+            Enter Email Address: <id = "emailFromCal" input type="text" value=""><br>
+         </form>
+         <button id ='email' onclick="sendTheMail(); return false;">E-mail Me My Route!</button>
+         <pre id="response"></pre>
+       </div>  
       <div class="list boxes" id="directions_panel"></div>
     </div>
       <div class="map boxes" id="map"></div>
-    <div id = "emaildiv">
-      <button id ='email' onclick="sendTheMail(); return false;">E-mail Me My Route!</button>
-      <pre id="response"></pre>
-    </div>  
+
     
     <script>
     var favorites = ["12TH AND ARCH STREETS PHILADELPHIA, PA 19107","Independence National Historical Park","Independence National Historical Park",
@@ -55,7 +59,7 @@
         var testEvents = JSON.parse(localStorage["locations"]);
         console.log(testEvents);
       var eventNum = testEvents.length;
-      var user_email = "yyue@wharton.upenn.edu";
+      var user_email = document.getElementById("emailFromCal");
       var i;
       for (i = 0; i < eventNum; i++)
       {
