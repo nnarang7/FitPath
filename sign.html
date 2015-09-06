@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="sign.css">
+<script src="jquery.min.js"></script>
 </head>
     <body>
         <pre id = "output"></pre>
@@ -13,11 +14,11 @@
         <li><a id="options" href = "sign.html">Sign Up/Log in</a></li>
     </ul>
 </div> 
-<div class="nav-wrapper">
-<h1 id ="intro">Pick a date!</h1>
+<!--<div class="nav-wrapper">
+<h1 id ="intro">Pick a date!</h1>	
     <input type = "date" name ="date">
     
-</div>
+</div>-->
 
 <div id = buttons>
     <h1 id ="intro1" >Sign in with Google now!</h1>
@@ -27,10 +28,14 @@
 </div>
 
 <form id = "formId">
-    <fieldset id = "formField">
+    <fieldset id = "formField" class="formLine">
         <label>
         Location: 
             <input type = "text" name = "username">
+        </label>
+        <label>
+        	Date:
+        	<input type = "date" name = "date">
         </label>
         <label>
         Start Time:
@@ -45,14 +50,13 @@
         
 <form id ="buttonId">
     <fieldset id = "butts">
-        <input type ="submit" name = "Submit" value = "Let's Explore!">
+        <input type ="button" name = "Submit" value = "Let's Explore!" onclick="transferInfo()">
         <input type = "button" name = "newLoca" value = "Add New Location" onclick = "newButton()">
     </fieldset>
 </form>       
 
 <script src ="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 <script type = "text/javascript">
-
 //Vivian's stuff
 		var clientId = '336948298289-fh0p7ls0sj5qs15qtu2d6tgav2dgsm0d.apps.googleusercontent.com';
 		var scopes = 'https://www.googleapis.com/auth/calendar.readonly';
@@ -182,7 +186,6 @@
 			    return ((difference_ms / 1000) / 60);
 			}
 		}
-
     
 //makes form visible to user
 function openForm(){
@@ -194,11 +197,37 @@ function openForm(){
     document.getElementById("guest_button").style.visibility = "hidden"; 
 }
 
+//add info for guest accounts
+function transferInfo() {
+	console.log("running transfer function");
+	//console.log(document.getElementById("formLine").text);
+	var eventLocations = [];
+	var eventTimesStart = [];
+	var eventTimesEnd = [];
+	var timeDifferences = [];
+	var allFormLines = document.getElementsByClassName("formLine");
+	for (var i = 0; i < allFormLines.length; i++) {
+		var currentId = allFormLines[i].getElementsByTagName('input');
+		for (var j = 0; j < currentId.length; j+= 4) {
+			eventLocations.push(currentId[j].value);
+			var eventDateSplit = (currentId[j+1].value).split("-");
+			var eventTimeStartSplit = (currentId[j+2].value).split(":");
+			var eventTimeEndSplit = (currentId[j+3].value).split(":");
+			var eventStart = new Date(eventDateSplit[0], eventDateSplit[1], eventDateSplit[2], eventTimeStartSplit[0], eventTimeStartSplit[1], 0, 0);
+			var eventEnd = new Date(eventDateSplit[0], eventDateSplit[1], eventDateSplit[2], eventTimeEndSplit[0], eventTimeEndSplit[1], 0, 0);
+			eventTimesStart.push(eventStart);
+			eventTimesEnd.push(eventEnd);
+		}
+	}
+	console.log(eventLocations);
+	console.log(eventTimesStart);
+	console.log(eventTimesEnd);
+}
 //creates a new form to input a new location
 function newButton(){
     var oldForm = document.getElementById("formField");
     var newForm = oldForm.cloneNode(true); 
-    newForm.id = '' ;
+    newForm.id = '';
     document.getElementById("formId").appendChild(newForm); 
 }
 </script>
