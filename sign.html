@@ -107,11 +107,13 @@
 		//https://developers.google.com/google-apps/calendar/v3/reference/events#resource
 		//Should be contained in the list response body shown below
 		function listUpcomingEvents() {
-			var dateBegin = new Date(year, month - 1, date, 0, 0, 0);
-			var dateEnd = new Date(year, month - 1, date + 1, 0, 0, 0);
 			console.log(year);
 			console.log(month);
 			console.log(date);
+			
+			var dateBegin = new Date(year, month - 1, date, 0, 0, 0);
+			var dateEnd = new Date(year, month - 1, date + 1, 0, 0, 0);
+			
 			console.log(dateBegin);
 			console.log(dateEnd);
 			var request = gapi.client.calendar.events.list( {
