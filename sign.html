@@ -67,6 +67,7 @@
 		var month;
 		var date;
 		var year;
+		var updatedFormat = [];
 		
 		function checkAuth() {
 			gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
@@ -319,6 +320,8 @@ function initMap(destArray, timeArray) {
 	  });
 	//console.log(destOrdering);
 	}
+	
+	updateArrayFormat();
 	//console.log(destOrdering);
 	//addFavorites();
 	//} 
@@ -328,6 +331,22 @@ function initMap(destArray, timeArray) {
 	//if yes, return route to summer
 	//if no, remove that destination from favorite locations and pick a new random location and start over
 	//functionality to take care of adding in new locations
+}
+
+function updateArrayFormat() {
+	for (var i = 0; i < destOrdering.size; i++) {
+		var currentAddress = destOrdering[i];
+		if (currentAddress.size === 6) {
+			var addressToAdd1 = [currentAddress[1], currentAddress[1], eventTimesStart[i], eventTimesEnd[i]];
+			var addressToAdd2 = [currentAddress[2], currentAddress[2], eventTimesStart[i+1], eventTimesEnd[i+1]];
+			updatedFormat.push(addressToAdd1);
+			updatedFormat.push(addressToAdd2);
+		} else if (currentAddress.size === 5) {
+			var addressToAdd = [currentAddress[0], currentAddress[1], currentAddress[3], currentAddress[4]];
+			updatedFormat.splice(updatedFormat.length - 2, 0, addressToAdd);
+		}
+	}
+	console.log(updatedFormat);
 }
 
 function addFavorites(startingMileage, favoriteLocations) {
