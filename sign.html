@@ -292,6 +292,8 @@ function initFirstMap(destArray, timeArray) {
   var geocoder = new google.maps.Geocoder;
 
   for (m = 0; m < destArray.length - 1; m++) {
+  	console.log(destArray[m]);
+  	console.log(destArray[m+1]);
 	callServiceDistance(destArray[m], destArray[m+1], m);
 	console.log(destOrdering);
 }
