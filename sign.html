@@ -442,6 +442,7 @@ function buildResponseFor(i) {
 	return function (response, status) {
 		if (status == google.maps.DistanceMatrixStatus.OK) {
 				var stringDist = response.rows[0].elements[0].distance.text;
+				console.log("STRING DIST" + stringDist);
 			    	var numMiles = parseFloat((stringDist.split(" "))[0]);
 			    	console.log("just added " + numMiles + " miles");
 			    	totalMileage += numMiles;
