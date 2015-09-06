@@ -492,9 +492,12 @@ function callServiceDistance(origin, destination, m) {
 	    avoidHighways: false,
 	    avoidTolls: false
 	  }, function(response, status) {
+	  	console.log("in response and status");
 	    if (status !== google.maps.DistanceMatrixStatus.OK) {
+	    	console.log("something failed");
 	      alert('Error was: ' + status);
 	    } else {
+	    	console.log("in this part of the function");
 	    	var stringDist = response.rows[0].elements[0].distance.text;
 	    	var numMiles = parseFloat((stringDist.split(" "))[0]);
 	    	console.log("just added " + numMiles + " miles");
