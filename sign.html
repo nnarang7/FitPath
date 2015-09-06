@@ -461,7 +461,8 @@ function buildResponseFor(i) {
 			    	var infoToAdd = [endTime, numMiles];
 			    	console.log("adding this info");
 			    	console.log(infoToAdd);
-			    	destOrdering.push(infoToAdd);			
+			    	destOrdering.push(infoToAdd);	
+			    	console.log(destOrdering);
 		}
 	}
 }
@@ -484,7 +485,7 @@ function initFirstMap(destArray, timeArray) {
 	    avoidHighways: false,
 	    avoidTolls: false
 	  }, buildResponseFor(i));
-	//console.log(destOrdering);
+	console.log(destOrdering);
 	}
 	console.log(destOrdering[i]);
 	destOrdering.splice(i, 1, [(destOrdering[i])[0], (destOrdering[i])[1], destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i])]);
