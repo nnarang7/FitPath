@@ -306,7 +306,7 @@ function initMap(destArray, timeArray) {
 	    		minutesToAddNums += 60 * parseInt(minutesToAdd[0]);
 	    		minutesToAddNums += parseInt(minutesToAdd[2]);
 	    	}
-	    	var endTimeMS = eventTimesStart[i].getTime() + minutesToAddNums * 60 * 1000;
+	    	var endTimeMS = (eventTimesStart[i]).getTime() + minutesToAddNums * 60 * 1000;
 	    	console.log(endTimeMS);
 	    	var endTime = new Date(endTimeMS);
 	    	
