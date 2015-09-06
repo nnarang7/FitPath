@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="sign.css">
+<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"
+        async defer></script>
+</head>
+    <body>
+        
+ <pre id = "output"></pre>
+<div id="header">
+    <h1 id = "logo"><a href = "index.html">RouteEx</a></h1>
+    <h2 id ="catchphrase">Exercise. Explore. Experience.</h2>
+</div> 
+
+<div id="date_maj">
+<h3 id ="intro" visibility = "hidden">Pick a date!</h3>
+    <input type = "date" id = "date" name ="date" onchange="viewOptions()">
+    <script type = "text/javascript">
+       function viewOptions(){
+           document.getElementById("buttons").style.visibility = "visible";
+           document.getElementById("buttons").style.position = "top";
+           document.getElementById("date").style.visibility = "hidden";
+       }
+    </script>
+    
+</div>
+   
+        
+<div id = "goal">
+    <h3 id = "goal_header">Start by setting a goal for the day!</h3>
+    <input type = "text" id = "goal_txt" name = "goal" placeholder = "goal in miles">
+    <input type="submit" id = "submit_goal" name = "submit" value = "Set Goal!" onclick = "addDate(this)">
+    
+    <form id = "formId">
+    <fieldset id = "formField">
+        <label>
+        Location: 
+            <input type = "text" name = "location">
+        </label>
+        <label>
+        Start Time:
+            <input type = "time" name = "startTime">
+        </label>
+        <label>
+        End Time:
+            <input type = "time" name = "endTime">
+        </label>
+    </fieldset>       
+</form>
+        
+<form id ="buttonId">
+    <fieldset id = "butts">
+        <input type ="submit" name = "Submit" value = "Let's Explore!">
+        <input type = "button" name = "newLoca" value = "Add New Location" onclick = "newButton()">
+    </fieldset>
+</form>     
+
+ <script type = "text/javascript">
+        var goal = 0; 
+        
+        function addDate(field){
+            //var date_head = document.createElement("h3"); 
+            //var new_date=document.createElement("input"); 
+            //new_date.setAttribute('id', "date"); 
+            //new_date.setAttribute('type', "date");
+            //var txt = document.createTextNode("Pick a date:         "); 
+            //date_head.appendChild(txt);  
+            //date_head.setAttribute('id', "date_head"); 
+            //new_date.setAttribute('onchange',"viewOptions()");
+            //document.getElementById("goal").appendChild(date_head); 
+            //date_head.appendChild(new_date); 
+            document.getElementById("date_maj").style.visibility = "visible"; 
+            goal = document.getElementById("goal_txt").value; 
+            document.getElementById("goal_header").innerHTML= "Your goal is " + goal + " miles!"; 
+            
+            var par = document.getElementById("goal"); 
+            var child1 = document.getElementById("goal_txt"); 
+            var child2 = document.getElementById("submit_goal"); 
+            par.removeChild(child1);
+            par.removeChild(child2);
+        }
+        
+        function viewOptions(){       
+            var par = document.getElementById("goal"); 
+            
+            var goog = document.createElement("h3"); 
+            var goog_head = document.createElement("h3"); 
+            goog_head.setAttribute('id', "goog_head"); 
+            var goog_txt = document.createTextNode("Sign in with Google!"); 
+            par.appendChild(goog); 
+            par.appendChild(goog_head); 
+            goog_head.appendChild(goog_txt); 
+           
+            var goog_butt = document.createElement("button"); 
+            goog_butt.setAttribute('name', "sign_in");
+            goog_butt.setAttribute('id', "authorize-button"); 
+            goog_butt.setAttribute('class', "button"); 
+            goog_butt.setAttribute('onclick', "handleAuthClick(event)"); 
+            var goog_butt_txt = document.createTextNode("Sign in"); 
+            goog_butt.appendChild(goog_butt_txt); 
+            par.appendChild(goog_butt);
+            
+            var guest = document.createElement("h3"); 
+            var guest_head = document.createElement("h3");
+            guest_head.setAttribute('id', "guest_head"); 
+            var guest_txt = document.createTextNode("Or Continue As Guest!"); 
+            var guest_butt = document.createElement("button")
+            var guest_butt_txt = document.createTextNode("Guest"); 
+            guest_butt.appendChild(guest_butt_txt); 
+            guest_butt.setAttribute('type', "button"); 
+            guest_butt.setAttribute('name', "guest"); 
+            guest_butt.setAttribute('id', "guest_button"); 
+            guest_butt.setAttribute('class', "button"); 
+            guest_butt.setAttribute('onclick', "openForm()"); 
+            
+            guest_head.appendChild(guest_txt); 
+            par.appendChild(guest); 
+            par.appendChild(guest_head); 
+            par.appendChild(guest_butt); 
+            
+            document.getElementById("date").style.visibility = "hidden"; 
+        }
+        
+        function openForm(){
+            document.getElementById("formId").style.visibility = "visible";
+            document.getElementById("buttonId").style.visibility="visible"; 
+            //document.getElementById("intro1").style.visibility ="hidden"; 
+            //document.getElementById("intro2").style.visibility = "hidden"; 
+            document.getElementById("authorize-button").style.visibility = "hidden"; 
+            document.getElementById("guest_button").style.visibility = "hidden"; 
+        
+//            var par = document.getElementById("goal"); 
+//            
+//            var form = document.createElement("form"); 
+//            form.setAttribute('id', "formId"); 
+//            par.appendChild(form); 
+//            
+//            var formField = document.createElement("fieldset"); 
+//            formField.setAttribute('id', "formField"); 
+//            form.appendChild(formField);
+//            
+//            var lbl_loca = document.createElement("label"); 
+//            var loca_txt = document.createTextNode("Location:"); 
+//            lbl_loca.appendChild(loca_txt); 
+//            form.appendChild(lbl_loca); 
+//            
+////            var input_loca = document.createElement("input"); 
+////            input_loca.setAttribute('type', "text"); 
+////            input_loca.setAttribute('id', "location"); 
+////            lbl_loca.appendChild(input_loca); 
+////            
+////            var lbl_stime = document.createElement("label"); 
+////            var stime_txt = document.createTextNode("Start Time:"); 
+////            lbl_stime.appendChild(stime_txt); 
+////            form.appendChild(lbl_stime); 
+////            
+////            var input_stime = document.createElement("input"); 
+////            input_stime.setAttribute('type', "time"); 
+////            input_stime.setAttribute('id', "start"); 
+////            lbl_stime.appendChild(input_stime); 
+////            
+////            var lbl_etime = document.createElement("label"); 
+////            var etime_txt = document.createTextNode("End Time:"); 
+////            lbl_etime.appendChild(etime_txt); 
+////            form.appendChild(lbl_etime); 
+////            
+////            var input_etime = document.createElement("input"); 
+////            input_etime.setAttribute('type', "time"); 
+////            input_etime.setAttribute('id', "end"); 
+////            lbl_etime.appendChild(input_etime); 
+////            
+////            var buttForm = document.createElement("form"); 
+////            buttForm.setAttribute('id', "buttId"); 
+////            par.appendChild(buttForm); 
+////            
+////            var buttField = document.createElement("fieldset"); 
+////            buttField.setAttribute('id', "buttField");
+////            buttForm.appendChild(buttField); 
+////            
+////            var submit = document.createElement("input");
+////            var submit_txt = document.createTextNode("Let's Explore!"); 
+////            submit.appendChild(submit_txt); 
+////            //-------> submit.appenChild(//call function)
+////            submit.setAttribute('type', "submit"); 
+////            buttField.appendChild(submit); 
+////            
+////            var newLoca = document.createElement("input");
+////            var newLoca_txt = document.createTextNode("Add a New Location"); 
+////            newLoca.setAttribute('type', "button"); 
+////            newLoca.appendChild(newLoca_txt); 
+////            newLoca.setAttribute('onClick', "newButton()"); 
+////            buttField.appendChild(newLoca); 
+//            
+            var goog_hd = document.getElementById("goog_head"); 
+            var goog_bt = document.getElementById("authorize-button")
+            var guest_hd = document.getElementById("guest_head"); 
+            var guest_bt = document.getElementById("guest_button"); 
+            
+            var par = document.getElementById("goal"); 
+            par.removeChild(goog_hd);
+            console.log("removed");
+            par.removeChild(goog_bt); 
+            par.removeChild(guest_hd); 
+            par.removeChild(guest_bt);
+            }
+            
+            
+    function newButton(){
+        var oldForm = document.getElementById("formField");
+        var newForm = oldForm.cloneNode(true); 
+        newForm.id = '';
+        document.getElementById("formId").appendChild(newForm); 
+    }
+        
+    </script>    
+</div>
+
+
+<script src ="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+<script type = "text/javascript">
+//Vivian's stuff
+		var clientId = '336948298289-fh0p7ls0sj5qs15qtu2d6tgav2dgsm0d.apps.googleusercontent.com';
+		var scopes = 'https://www.googleapis.com/auth/calendar.readonly';
+		var eventLocations = [];
+		var eventTimesStart = [];
+		var eventTimesEnd = [];
+		var timeDifferences = [];
+		var month;
+		var date;
+		var year;
+		var updatedFormat = [];
+		
+		function checkAuth() {
+			gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
+		}
+		function handleAuthResult(authResult) {
+	        var authorizeButton = document.getElementById('authorize-button');
+	        if (authResult && !authResult.error) {
+	          // Hide auth UI, then load client library.
+	          authorizeButton.visible = "false";
+	          loadCalendarApi();
+	        } else {
+	          // Show auth UI, allowing the user to initiate authorization by
+	          // clicking authorize button.
+	          authorizeButton.visible = "true";
+	        }
+	      }
+	      /*
+		function handleAuthResult(authResult) {
+			var authorizeButton = document.getElementById('authorize-button');
+			if (authResult && !authResult.error) {
+				authorizeButton.visible = "false";
+				makeApiCall();
+			}
+			else {
+				authorizeButton.visible = "true";
+				authorizeButton.onclick = handleAuthClick;
+			}
+		}
+		*/
+		function handleAuthClick(event) {
+			getDate();
+			gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
+			return false;
+		}
+		
+		function popitup(url) {
+   			newwindow = window.open(url, 'name', 'height=200,width=150');
+   			if (window.focus) {
+				 newwindow.focus();
+   			}
+   			return false;
+ 		}
+ 		
+		function loadCalendarApi() {
+			gapi.client.load('calendar', 'v3', listUpcomingEvents);
+		}
+		//Use "location": string resource representation to retrieve location
+		//https://developers.google.com/google-apps/calendar/v3/reference/events#resource
+		//Should be contained in the list response body shown below
+		function listUpcomingEvents() {
+			console.log(year);
+			console.log(month);
+			console.log(date);
+			
+			var dateBegin = new Date(year, month - 1, date, 0, 0, 0);
+			var dateEndMS = dateBegin.getTime() + 86400000;
+			var dateEnd = new Date(dateEndMS);
+			
+			console.log(dateBegin);
+			console.log(dateEnd);
+			var request = gapi.client.calendar.events.list( {
+				'calendarId': 'primary',
+				'timeMin': dateBegin.toISOString(),
+				'timeMax': dateEnd.toISOString(),
+				'showDeleted': false,
+				'singleEvents': true,
+				'maxResults': 10,
+				'orderBy': 'startTime'
+			});
+			request.execute(function(resp) {
+				var events = resp.items;
+				//appendPre('Upcoming events:');
+				if (events.length > 0) {
+					for (i = 0; i < events.length; i++) {
+              			var event = events[i];
+              			var whenS = event.start.dateTime;
+              			var whenE = event.end.dateTime;
+              			var location = event.location;
+            
+              			if (!whenS) {
+                			whenS = event.start.date;
+              			}
+              			if (!whenE) {
+                			whenE = event.end.date;
+              			}
+              			//appendPre(event.summary + ' (' + whenS + ')');
+              			//appendPre(event.summary + ' (' + whenE + ')');
+              			//appendPre(event.summary + ' (' + location + ')');
+			
+              			eventTimesStart.push(whenS);
+              			eventTimesEnd.push(whenE);
+              			eventLocations.push(location);
+              			console.log(location);
+            			}
+            			calculateTimes();
+            			/*
+            			for (i = 0; i < eventTimesStart.length; i++) {
+            				console.log(eventTimesStart[i]);
+            				console.log(eventTimesEnd[i]);
+            				console.log(eventLocations[i]);
+            			}
+            			for (i = 0; i < timeDifferences.length; i++) {
+            				console.log(timeDifferences[i]);
+            			}
+            			*/
+				}
+				else {
+					//appendPre('No upcoming events found.');
+				}
+				
+				console.log(eventLocations);
+				console.log(timeDifferences);
+				initFirstMap(eventLocations, timeDifferences);				
+			});
+			
+		}
+		function appendPre(message) {
+			var pre = document.getElementById('output');
+			var textContent = document.createTextNode(message + '\n');
+			pre.appendChild(textContent);
+		}
+		function calculateTimes() {
+			for(i = 0; i < (eventTimesStart.length - 1); i++) {
+				timeDifferences.push(dateTimeDifference(eventTimesEnd[i], eventTimesStart[i + 1]));
+			}
+		}
+		/*
+		Write conditionals for date vs dateTime inputs
+		*/
+		function dateTimeDifference(date1, date2) {
+			if ((typeof date1 == 'Date') && (typeof date2 == 'Date')) {
+			    var date1_ms = date1.getTime();
+			    var date2_ms = date2.getTime();
+			    var difference_ms = date2_ms - date1_ms;
+			    //Returns number of minutes
+			    console.log(Math.floor(Math.floor(difference_ms / 1000) / 60));
+			    return Math.floor(Math.floor(difference_ms / 1000) / 60);	
+			}
+			else {
+			    var d1 = new Date(date1);
+			    var d2 = new Date(date2);
+			    var date1_ms = d1.getTime();
+			    var date2_ms = d2.getTime();
+			    console.log("Time 1: " + date1_ms);
+			    console.log("Time 2: " + date2_ms);
+			    var difference_ms = date2_ms - date1_ms;
+			    console.log(((difference_ms / 1000) / 60));
+			    //Returns number of minutes
+			    return ((difference_ms / 1000) / 60);
+			}
+		}
+function getDate() {
+	console.log(document.getElementById('date'));
+	var fullDate = document.getElementById('date').value;
+	var dateSplit = fullDate.split("-");
+	year = dateSplit[0];
+	month = dateSplit[1];
+	date = dateSplit[2];
+}
+//add info for guest accounts
+function transferInfo() {
+	getDate();
+	console.log("running transfer function");
+	//console.log(document.getElementById("formLine").text);
+	var eventLocations = [];
+	var eventTimesStart = [];
+	var eventTimesEnd = [];
+	var timeDifferences = [];
+	var allFormLines = document.getElementsByClassName("formLine");
+	for (var i = 0; i < allFormLines.length; i++) {
+		var currentId = allFormLines[i].getElementsByTagName('input');
+		for (var j = 0; j < currentId.length; j+= 4) {
+			eventLocations.push(currentId[j].value);
+			var eventDateSplit = (currentId[j+1].value).split("-");
+			var eventTimeStartSplit = (currentId[j+2].value).split(":");
+			var eventTimeEndSplit = (currentId[j+3].value).split(":");
+			var eventStart = new Date(eventDateSplit[0], eventDateSplit[1], eventDateSplit[2], eventTimeStartSplit[0], eventTimeStartSplit[1], 0, 0);
+			var eventEnd = new Date(eventDateSplit[0], eventDateSplit[1], eventDateSplit[2], eventTimeEndSplit[0], eventTimeEndSplit[1], 0, 0);
+			eventTimesStart.push(eventStart);
+			eventTimesEnd.push(eventEnd);
+		}
+	}
+	calculateTimes();
+	console.log(eventLocations);
+	console.log(eventTimesStart);
+	console.log(eventTimesEnd);
+}
+//creates a new form to input a new location
+function newButton(){
+    var oldForm = document.getElementById("formField");
+    var newForm = oldForm.cloneNode(true); 
+    newForm.id = '';
+    document.getElementById("formId").appendChild(newForm); 
+}
+var destOrdering = [];
+var goalMileage = 5.0;
+var totalMileage = 0;
+var timeArray = timeDifferences;
+var favoriteLocations = ['Philadelphia City Hall, Philadelphia, PA', '30th Street Station, Philadelphia, PA',"12TH AND ARCH STREETS PHILADELPHIA, PA 19107","Independence National Historical Park","Independence National Historical Park",
+    "The Liberty Bell Center","Independence Hall","The Philadelphia Zoo","Longwood Gardens","The Franklin Institute","The Betsy Ross House",
+    "Philadelphia Museum of Art","National Constitution Center","Penn Park, PA","Jon Huntsman Hall","30th street station, Philadelphia","Penn Museum",
+    "Philadelphia Chinatown"];
+//destArray is eventLocations, timeArray is timeDifferences
+function initFirstMap(destArray, timeArray) {
+	console.log("initializing map");
+	console.log(destArray);
+	console.log(timeArray);
+  var markersArray = [];
+  //var destArray = ['Wells Fargo Center, Philadelphia, PA', '3901 Locust Walk, Philadelphia, PA'];
+  var service = new google.maps.DistanceMatrixService;
+  var geocoder = new google.maps.Geocoder;
+  for (m = 0; m < destArray.length - 1; m++) {
+  	console.log(destArray[m]);
+  	console.log(destArray[m+1]);
+	callServiceDistance(destArray[m], destArray[m+1], m);
+	console.log(destOrdering);
+}
+	    addFavorites(totalMileage, favoriteLocations);
+	    updateArrayFormat();
+	    localStorage["locations"] = JSON.stringify(updatedFormat);
+		console.log(updatedFormat);
+		console.log(JSON.stringify(updatedFormat));
+	//localStorage["locations"] = JSON.stringify(updatedFormat);
+	//window.open('goal_popup.html', '_blank', "height=150px, width=250px");
+	//popitup('goal_popup.html');
+	window.open('map.html', '_self');
+	
+	//endProcess();
+	//updateArrayFormat();
+	//console.log(destOrdering);
+	//addFavorites();
+	//} 
+	//so make a service call that picks one of these locations at random and compares it to all of the locations on the route
+	//first eliminate things if they take too much time, then record the one taking the max distance (record its address, the two points it would be in between, and the time it takes to get there)
+	//add the destination to the route (aka push it into the array) and see if the goal mileage has been reached yet
+	//if yes, return route to summer
+	//if no, remove that destination from favorite locations and pick a new random location and start over
+	//functionality to take care of adding in new locations
+	console.log(destOrdering);
+}
+function callServiceDistance(origin, destination, m) {
+	var service = new google.maps.DistanceMatrixService;
+	  service.getDistanceMatrix({
+	    origins: [origin],
+	    destinations: [destination],
+	    travelMode: google.maps.TravelMode.WALKING,
+	    unitSystem: google.maps.UnitSystem.IMPERIAL,
+	    avoidHighways: false,
+	    avoidTolls: false
+	  }, function(response, status) {
+	    if (status !== google.maps.DistanceMatrixStatus.OK) {
+	      alert('Error was: ' + status);
+	    } else {
+	    	var stringDist = response.rows[0].elements[0].distance.text;
+	    	var numMiles = parseFloat((stringDist.split(" "))[0]);
+	    	console.log("just added " + numMiles + " miles");
+	    	totalMileage += numMiles;
+	    	//console.log("CURRENT INDEX " + currentIndex);
+	    	//console.log(destArray[currentIndex]);
+	    	var minutesToAdd = response.rows[0].elements[0].duration.text.split(" ");
+	    	var minutesToAddNums = 0;
+	    	if (minutesToAdd.length === 2) {
+	    		minutesToAddNums = parseInt(minutesToAdd[0]);
+	    	} else if (minutesToAdd.length === 4) {
+	    		minutesToAddNums += 60 * parseInt(minutesToAdd[0]);
+	    		minutesToAddNums += parseInt(minutesToAdd[2]);
+	    	}
+	    	var endTimeMS = (new Date(eventTimesStart[i])).getTime() + minutesToAddNums * 60 * 1000;
+	    	console.log(endTimeMS);
+	    	var endTime = new Date(endTimeMS);
+	    	
+	    	var infoToAdd = [origin, origin, destination, new Date(eventTimesStart[m]), endTime, numMiles];
+	    	console.log("adding this info");
+	    	console.log(infoToAdd);
+	    	destOrdering.push(infoToAdd);
+	    	console.log(destOrdering);
+	    }
+	    
+	  });	
+}
+function updateArrayFormat() {
+	console.log("now updating format");
+	console.log(destOrdering);
+	updatedFormat= [];
+	for (var i = 0; i < destOrdering.length; i++) {
+		var currentAddress = destOrdering[i];
+		console.log(currentAddress);
+		if (currentAddress.length === 6) {
+			var addressToAdd1 = [currentAddress[1], currentAddress[1], eventTimesStart[i], eventTimesEnd[i]];
+			var addressToAdd2 = [currentAddress[2], currentAddress[2], eventTimesStart[i+1], eventTimesEnd[i+1]];
+			updatedFormat.push(addressToAdd1);
+			updatedFormat.push(addressToAdd2);
+		} else if (currentAddress.length === 5) {
+			var addressToAdd = [currentAddress[0], currentAddress[1], currentAddress[2], currentAddress[3]];
+			updatedFormat.splice(updatedFormat.length - 1, 0, addressToAdd);
+		}
+		console.log(updatedFormat);
+	}
+	console.log(updatedFormat);
+}
+function addFavorites(startingMileage, favoriteLocations) {
+	console.log("current ordering");
+	console.log(destOrdering);
+	var milesToAdd = 0;
+	console.log("adding favorites now");
+	var service = new google.maps.DistanceMatrixService;
+	var currentIndex = Math.round(Math.random() * favoriteLocations.length - 0.5);
+	var currentLocation = favoriteLocations[currentIndex];
+	console.log("currently considering " + currentLocation);
+		var updatedArray = [];
+		updatedArray.push(destOrdering[0][1]);
+		updatedArray.push(destOrdering[0][2]);
+		for (var a = 1; a < destOrdering.length; a++) {
+			updatedArray.push(destOrdering[a][2]);
+		}
+	//while (totalMileage < goalMileage && favoriteLocations.length !== 0) {
+	  service.getDistanceMatrix({
+	    origins: [currentLocation],
+	    destinations: updatedArray,
+	    travelMode: google.maps.TravelMode.WALKING,
+	    unitSystem: google.maps.UnitSystem.IMPERIAL,
+	    avoidHighways: false,
+	    avoidTolls: false
+	  }, function(response, status) {
+	    if (status !== google.maps.DistanceMatrixStatus.OK) {
+	      alert('Error was: ' + status);
+	    } else {
+	    	console.log("this array");
+	    	var durationArray = response.rows[0].elements;
+	    	var maxDestName = "";
+	    	var maxDestPointA = "";
+	    	var maxDestPointB = "";
+	    	var maxDuration = 0;
+	    	var maxDist = 0;
+	    	var totalTimeTaken = 0;
+	    	for (var j = 0; j < durationArray.length - 1; j++) {
+	    		console.log("running");
+	    		var currentInfo = durationArray[j];
+	    		var nextDestInfo = durationArray[j + 1];
+	    		var stringTimeSplit = (currentInfo.duration.text).split(" ");
+	    		var nextDestTimeSplit = (nextDestInfo.duration.text).split(" ");
+	    		var oneWayDist = parseFloat(((currentInfo.distance.text).split(" "))[0]);
+	    		var comingBackDist = parseFloat(((nextDestInfo.distance.text).split(" "))[0]);
+	    		var timeTakenLeave = 0;
+	    		var timeTakenReturn = 0;
+	    		if (stringTimeSplit.length == 2) {
+	    			timeTakenLeave = parseInt(stringTimeSplit[0]);
+	    			console.log(timeTakenLeave);
+	    		} else if (stringTimeSplit.length == 4) {
+	    			timeTakenLeave += 60 * (parseInt(stringTimeSplit[0]));
+	    			timeTakenLeave += parseInt(stringTimeSplit[2]);
+	    			console.log(timeTakenLeave);
+	    		}
+	    		if (nextDestTimeSplit.length == 2) {
+	    			timeTakenReturn = parseInt(nextDestTimeSplit[0]);
+	    		} else if (nextDestTimeSplit.length == 4) {
+	    			timeTakenReturn += 60 * (parseInt(nextDestTimeSplit[0]));
+	    			timeTakenReturn += parseInt(nextDestTimeSplit[2]);
+	    		}
+	    		console.log(timeTakenReturn);
+	    		if (timeTakenLeave + timeTakenReturn < timeArray[j]) {
+	    			if (oneWayDist + comingBackDist > maxDist) {
+	    				maxDist = oneWayDist + comingBackDist;
+	    				maxDestName = response.originAddresses[0];
+	    				maxDestPointA = j;
+	    				maxDestPointB = j+1;
+	    				totalTimeTaken = timeTakenLeave + timeTakenReturn;
+	    				console.log(maxDist);
+	    				console.log(maxDestName);
+	    				console.log(maxDestPointA);
+	    				console.log(maxDestPointB);
+	    			}
+	    		}
+	    	}
+	    	console.log(maxDist);
+	    }
+	    console.log(maxDist);
+	    	if (maxDist !== 0 && maxDist !== undefined) {
+	    		var endTimeMS = (new Date(eventTimesEnd[maxDestPointA])).getTime() + totalTimeTaken * 60 * 1000;
+	    		console.log(endTimeMS);
+	    		var endTime = new Date(endTimeMS);
+		    	var newInfoToAdd = [maxDestName, maxDestName, new Date(eventTimesEnd[maxDestPointA]), endTime, maxDist];
+		    	//destOrdering.push(newInfoToAdd);
+		    	console.log(newInfoToAdd);
+				milesToAdd = maxDist;
+				console.log(milesToAdd);
+				destOrdering.splice(maxDestPointB, 0, newInfoToAdd);
+	    	} 
+				for (var b = 0; b < favoriteLocations.length; b++) {
+					if (favoriteLocations[b].indexOf(maxDestName) > -1 || maxDestName.indexOf(favoriteLocations[b]) > -1) {
+						favoriteLocations.splice(b, 1);
+					}
+					console.log(favoriteLocations);
+				}
+	    		//destOrdering.splice(maxDestPointB, 0, newInfoToAdd); 
+	    		   	
+	    	console.log(destOrdering);
+	    	updateArrayFormat();
+	    	totalMileage += milesToAdd;
+	    	console.log(favoriteLocations.length);
+	    	if (totalMileage < goalMileage && favoriteLocations.length !== 0) {
+	    		console.log("adding new things");
+	    		addFavorites(totalMileage, favoriteLocations);
+	    	}
+	  });	
+	//}		
+}
+</script>
+
+    
+</body>
+</html>
