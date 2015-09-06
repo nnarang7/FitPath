@@ -337,6 +337,7 @@ function updateArrayFormat() {
 	console.log("now updating format");
 	for (var i = 0; i < destOrdering.size; i++) {
 		var currentAddress = destOrdering[i];
+		console.log(currentAddress);
 		if (currentAddress.size === 6) {
 			var addressToAdd1 = [currentAddress[1], currentAddress[1], eventTimesStart[i], eventTimesEnd[i]];
 			var addressToAdd2 = [currentAddress[2], currentAddress[2], eventTimesStart[i+1], eventTimesEnd[i+1]];
@@ -346,6 +347,7 @@ function updateArrayFormat() {
 			var addressToAdd = [currentAddress[0], currentAddress[1], currentAddress[3], currentAddress[4]];
 			updatedFormat.splice(updatedFormat.length - 2, 0, addressToAdd);
 		}
+		console.log(updatedFormat);
 	}
 	console.log(updatedFormat);
 }
