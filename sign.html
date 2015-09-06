@@ -496,7 +496,7 @@ function addFavorites(startingMileage, favoriteLocations) {
   var locations = new Array(eventNum);
   var contentStrings = new Array(eventNum);
   var markers = new Array(eventNum);
-  var centerLoc = testEvents[0][4];
+  var centerLoc = testEvents[0][1];
   //create empty LatLngBounds object for autocentering
   var bounds = new google.maps.LatLngBounds();
   var map = new google.maps.Map(document.getElementById('map'), {
