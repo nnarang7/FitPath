@@ -480,6 +480,9 @@ function initFirstMap(destArray, timeArray) {
 }
 
 function callServiceDistance(origin, destination, m) {
+	console.log(origin);
+	console.log(destination);
+	console.log(m);
 	var service = new google.maps.DistanceMatrixService;
 	  service.getDistanceMatrix({
 	    origins: [origin],
@@ -499,6 +502,7 @@ function callServiceDistance(origin, destination, m) {
 	    	//console.log("CURRENT INDEX " + currentIndex);
 	    	//console.log(destArray[currentIndex]);
 	    	var minutesToAdd = response.rows[0].elements[0].duration.text.split(" ");
+	    	console.log(minutesToAdd);
 	    	var minutesToAddNums = 0;
 	    	if (minutesToAdd.length === 2) {
 	    		minutesToAddNums = parseInt(minutesToAdd[0]);
