@@ -352,7 +352,7 @@ function callServiceDistance(origin, destination, m) {
 	    	console.log(endTimeMS);
 	    	var endTime = new Date(endTimeMS);
 	    	
-	    	var infoToAdd = [destArray[currentIndex], origin, destination, new Date(eventTimesStart[m]), endTime, numMiles];
+	    	var infoToAdd = [origin, origin, destination, new Date(eventTimesStart[m]), endTime, numMiles];
 	    	console.log("adding this info");
 	    	console.log(infoToAdd);
 	    	destOrdering.push(infoToAdd);
