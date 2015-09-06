@@ -317,11 +317,11 @@ function initMap(destArray, timeArray) {
 	    	destOrdering.push(infoToAdd);
 	    }
 	    addFavorites(totalMileage, favoriteLocations);
-	    
+	    updateArrayFormat();
 	  });
-	  updateArrayFormat();
 	//console.log(destOrdering);
 	}
+	//endProcess();
 	//updateArrayFormat();
 	//console.log(destOrdering);
 	//addFavorites();
@@ -332,11 +332,18 @@ function initMap(destArray, timeArray) {
 	//if yes, return route to summer
 	//if no, remove that destination from favorite locations and pick a new random location and start over
 	//functionality to take care of adding in new locations
+	console.log(destOrdering);
+}
+
+function endProcess() {
+	console.log(destOrdering);
+	updateArrayFormat();
 }
 
 function updateArrayFormat() {
 	console.log("now updating format");
 	console.log(destOrdering);
+	updatedFormat= [];
 	for (var i = 0; i < destOrdering.length; i++) {
 		var currentAddress = destOrdering[i];
 		console.log(currentAddress);
