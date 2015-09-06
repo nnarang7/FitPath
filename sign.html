@@ -486,7 +486,8 @@ function initFirstMap(destArray, timeArray) {
 	  }, buildResponseFor(i));
 	//console.log(destOrdering);
 	}
-	destOrdering.splice(i, 1, [destOrdering[i][0], destOrdering[i][1], destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i])]);
+	console.log(destOrdering[i]);
+	destOrdering.splice(i, 1, [(destOrdering[i])[0], (destOrdering[i])[1], destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i])]);
 	console.log([destOrdering[i][0], destOrdering[i][1], destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i])]);
 	console.log(destOrdering);
 	    addFavorites(totalMileage, favoriteLocations);
