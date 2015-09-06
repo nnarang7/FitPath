@@ -451,7 +451,7 @@ function initFirstMap(destArray, timeArray) {
   for (m = 0; m < destArray.length - 1; m++) {
   	console.log(destArray[m]);
   	console.log(destArray[m+1]);
-	callServiceDistance(destArray[m], destArray[m+1], m);
+  	setTiemout(callServiceDistance(destArray[m], destArray[m+1], m), 0);
 	console.log(destOrdering);
   }
   console.log(destOrdering);
