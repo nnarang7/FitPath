@@ -1,0 +1,11 @@
+p {
+	color: black;
+	background-color: #eafbff;
+	font-family: Verdana;
+}
+
+#goal {
+	color: gray;
+	font-family: Verdana;
+	font-size: 30px;
+}
