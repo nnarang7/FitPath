@@ -390,7 +390,7 @@
 
 function getDate() {
 	console.log(document.getElementById('date'));
-	var fullDate = document.getElementById('date')[0].value;
+	var fullDate = document.getElementById('date')[0].innerHTML;
 	var dateSplit = fullDate.split("-");
 	year = dateSplit[0];
 	month = dateSplit[1];
