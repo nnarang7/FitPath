@@ -481,14 +481,15 @@ function addFavorites(startingMileage, favoriteLocations) {
       var eventNum = testEvents.length;
       var user_email = "yyue@wharton.upenn.edu";
       var i;
-      for (i = 0; i < eventNum; i++)
-      {
-        testEvents[i][2] = parse(testEvents[i][2]);
-        testEvents[i][3] = parse(testEvents[i][3]);
-      }
+
       //var user_email = "viviange0830@gmail.com";
       
  function initMap() {
+       for (var i = 0; i < eventNum; i++)
+      {
+        testEvents[i][2] = parse(testEvents[i][2]);
+        testEvents[i][3] = parse(testEvents[i][3]);
+      }	
   var i;
   var directionsDisplay = new google.maps.DirectionsRenderer;
   var directionsService = new google.maps.DirectionsService;
