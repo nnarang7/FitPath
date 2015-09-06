@@ -109,6 +109,9 @@
 		function listUpcomingEvents() {
 			var dateBegin = new Date(year, month - 1, date, 0, 0, 0);
 			var dateEnd = new Date(year, month - 1, date + 1, 0, 0, 0);
+			console.log(year);
+			console.log(month);
+			console.log(date);
 			console.log(dateBegin);
 			console.log(dateEnd);
 			var request = gapi.client.calendar.events.list( {
