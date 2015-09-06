@@ -453,12 +453,13 @@ function initFirstMap(destArray, timeArray) {
   	console.log(destArray[m+1]);
 	callServiceDistance(destArray[m], destArray[m+1], m);
 	console.log(destOrdering);
+  }
+  console.log(destOrdering);
 	    addFavorites(totalMileage, favoriteLocations);
 	    updateArrayFormat();
 	    localStorage["locations"] = JSON.stringify(updatedFormat);
 		console.log(updatedFormat);
 		console.log(JSON.stringify(updatedFormat));	
-}
 
 	//localStorage["locations"] = JSON.stringify(updatedFormat);
 	//window.open('goal_popup.html', '_blank', "height=150px, width=250px");
