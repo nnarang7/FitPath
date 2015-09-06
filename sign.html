@@ -12,6 +12,19 @@
     <h1 id = "logo"><a href = "index.html">RouteEx</a></h1>
     <h2 id ="catchphrase">Exercise. Explore. Experience.</h2>
 </div> 
+
+<div id="date_maj">
+<h3 id ="intro" visibility = "hidden">Pick a date!</h3>
+    <input type = "date" name ="date" onchange="viewOptions()">
+    <script type = "text/javascript">
+       function viewOptions(){
+           document.getElementById("buttons").style.visibility = "visible";
+           document.getElementById("buttons").style.position = "top";
+           document.getElementById("date").style.visibility = "hidden";
+       }
+    </script>
+    
+</div>
    
         
 <div id = "goal">
@@ -47,17 +60,17 @@
         var goal = 0; 
         
         function addDate(field){
-            var date_head = document.createElement("h3"); 
-            var new_date=document.createElement("input"); 
-            new_date.setAttribute('id', "date"); 
-            new_date.setAttribute('type', "date");
-            var txt = document.createTextNode("Pick a date:         "); 
-            date_head.appendChild(txt);  
-            date_head.setAttribute('id', "date_head"); 
-            new_date.setAttribute('onchange',"viewOptions()");
-            document.getElementById("goal").appendChild(date_head); 
-            date_head.appendChild(new_date); 
-            
+            //var date_head = document.createElement("h3"); 
+            //var new_date=document.createElement("input"); 
+            //new_date.setAttribute('id', "date"); 
+            //new_date.setAttribute('type', "date");
+            //var txt = document.createTextNode("Pick a date:         "); 
+            //date_head.appendChild(txt);  
+            //date_head.setAttribute('id', "date_head"); 
+            //new_date.setAttribute('onchange',"viewOptions()");
+            //document.getElementById("goal").appendChild(date_head); 
+            //date_head.appendChild(new_date); 
+            document.getElementById("date_maj").style.visibility = "visible"; 
             goal = document.getElementById("goal_txt").value; 
             document.getElementById("goal_header").innerHTML= "Your goal is " + goal + " miles!"; 
             
