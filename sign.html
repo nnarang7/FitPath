@@ -455,7 +455,7 @@ function initFirstMap(destArray, timeArray) {
 	console.log(destOrdering);
   }
   console.log(destOrdering);
-	    addFavorites(totalMileage, favoriteLocations);
+	    setTimeout(addFavorites(totalMileage, favoriteLocations), 1000);
 	    updateArrayFormat();
 	    localStorage["locations"] = JSON.stringify(updatedFormat);
 		console.log(updatedFormat);
