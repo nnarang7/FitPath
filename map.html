@@ -1,25 +1,16 @@
-
- <!-- singleEvent 
+<!-- singleEvent 
 //0: Event Name
 //1: Event address 
 //2: starting time
 //3: ending time -->
 
-<script>
-//Getting infomation of testEvents from Natasha 
-  var testEvents = [["aaa","John Huntsman Hall","8:00am","9:00am"],
-    ["bbb","University of Pennsylvania","10:00am","11:00am"],
-    ["ccc","Fifth Avenue","8:00pm","9:00pm"]];
-    var eventNum = testEvents.length;
-   var user_email = "yyue@wharton.upenn.edu";
-  //var user_email = "viviange0830@gmail.com";
-</script>
 
 <!DOCTYPE html>
 <html>
   <head>
     <script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
     <script type="text/javascript" src="js/send-email.js"></script>
+    <script type="text/javascript" src="js/parse.js"></script>
     <script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -36,6 +27,23 @@
     </style>
   </head>
   <body>
+
+    <script>
+    //Getting infomation of testEvents from Natasha 
+      var testEvents = [["aaa","John Huntsman Hall","2015-09-07T08:08:00-04:00","2015-09-07T19:09:00-04:00"],
+        ["bbb","University of Pennsylvania","2015-09-07T10:00:00-04:00","2015-09-07T11:00:00-04:00"],
+        ["ccc","Fifth Avenue","2015-09-07T15:00:00-04:00","2015-09-07T17:00:00-04:00"]];
+      var eventNum = testEvents.length;
+      var user_email = "yyue@wharton.upenn.edu";
+      var i;
+      for (i = 0; i < eventNum; i++)
+      {
+        testEvents[i][2] = parse(testEvents[i][2]);
+        testEvents[i][3] = parse(testEvents[i][3]);
+      }
+      //var user_email = "viviange0830@gmail.com";
+    </script>
+
     <div id = "emaildiv">
       <button id ='email' onclick="sendTheMail(); return false;">Send the Mail</button>
       <pre id="response"></pre>
