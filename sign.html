@@ -320,6 +320,7 @@ function initFirstMap(destArray, timeArray) {
 }
 
 function callServiceDistance(origin, destination, m) {
+	var service = google.maps.DistanceMatrixService;
 	  service.getDistanceMatrix({
 	    origins: [origin],
 	    destinations: [destination],
