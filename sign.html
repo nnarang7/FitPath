@@ -334,7 +334,8 @@ function initFirstMap(destArray, timeArray) {
 	console.log(updatedFormat);
 	console.log(JSON.stringify(updatedFormat));
 	//localStorage["locations"] = JSON.stringify(updatedFormat);
-	popitup('goal_popup.html');
+	window.open('goal_popup.html', '_blank', "height=150px, width=250px");
+	//popitup('goal_popup.html');
 	window.open('map.html', '_self');
 	
 	//endProcess();
