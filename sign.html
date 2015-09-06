@@ -411,7 +411,10 @@ function addFavorites(startingMileage, favoriteLocations) {
 	    }
 	    console.log(maxDist);
 	    	if (maxDist !== 0 && maxDist !== undefined) {
-		    	var newInfoToAdd = [maxDestName, maxDestName, "starting time", "starting time + " + totalTimeTaken, maxDist];
+	    		var endTimeMS = (new Date(eventTimesEnd[maxDestPointA])).getTime() + totalTimeTaken * 60 * 1000;
+	    		console.log(endTimeMS);
+	    		var endTime = new Date(endTimeMS);
+		    	var newInfoToAdd = [maxDestName, maxDestName, eventTimesEnd[maxDestPointA], endTimeMS, maxDist];
 		    	destOrdering.push(newInfoToAdd);
 		    	console.log(newInfoToAdd);
 				milesToAdd = maxDist;
