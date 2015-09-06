@@ -353,7 +353,7 @@ function updateArrayFormat() {
 			updatedFormat.push(addressToAdd1);
 			updatedFormat.push(addressToAdd2);
 		} else if (currentAddress.length === 5) {
-			var addressToAdd = [currentAddress[0], currentAddress[1], currentAddress[3], currentAddress[4]];
+			var addressToAdd = [currentAddress[0], currentAddress[1], currentAddress[2], currentAddress[3]];
 			updatedFormat.splice(updatedFormat.length - 1, 0, addressToAdd);
 		}
 		console.log(updatedFormat);
