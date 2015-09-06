@@ -1,12 +1,4 @@
-#list {
-  float: left;
-  display: inline-block;
-}
 
-#map {
-  float: right;
-  display: inline-block;
-}
 
 button {
   margin-left: auto;
