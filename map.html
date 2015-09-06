@@ -1,4 +1,5 @@
-<!-- singleEvent 
+
+ <!-- singleEvent 
 //0: Event Name
 //1: Event address 
 //2: starting time
@@ -29,10 +30,16 @@
   <body>
 
     <script>
+    var favorites = ["12TH AND ARCH STREETS PHILADELPHIA, PA 19107","Independence National Historical Park","Independence National Historical Park",
+    "The Liberty Bell Center","Independence Hall","The Philadelphia Zoo","Longwood Gardens","The Franklin Institute","The Betsy Ross House",
+    "Philadelphia Museum of Art","National Constitution Center","Penn Park, PA","Jon Huntsman Hall","30th street station, Philadelphia","Penn Museum",
+    "Philadelphia Chinatown"];
+    console.log(favorites.length);
     //Getting infomation of testEvents from Natasha 
-      var testEvents = [["aaa","John Huntsman Hall","2015-09-07T08:08:00-04:00","2015-09-07T19:09:00-04:00"],
-        ["bbb","University of Pennsylvania","2015-09-07T10:00:00-04:00","2015-09-07T11:00:00-04:00"],
-        ["ccc","Fifth Avenue","2015-09-07T15:00:00-04:00","2015-09-07T17:00:00-04:00"]];
+      var testEvents = [["aaa","Philadelphia Chinatown","2015-09-07T08:08:00-04:00","2015-09-07T19:09:00-04:00"], 
+      //reading terminal market
+        ["bbb","Jon Huntsman Hall","2015-09-07T10:00:00-04:00","2015-09-07T11:00:00-04:00"],
+        ["e","National Constitution Center","2015-09-07T15:00:00-04:00","2015-09-07T17:00:00-04:00"]];
       var eventNum = testEvents.length;
       var user_email = "yyue@wharton.upenn.edu";
       var i;
