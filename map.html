@@ -32,9 +32,12 @@
  <div id = "emailContent">
       <div class="goals">Congratulations! We've found a path that can help you reach your goal!</div>
        <div id = "emaildiv">
-         <form action="demo_form.asp">
-            Enter Email Address: <id = "emailFromCal" input type="text" value=""><br>
-         </form>
+         <!--<form action="demo_form.asp">-->
+         <!--   Enter Email Address: <id = "emailFromCal" input type="text" value=""><br>-->
+         <!--</form>-->
+         
+         <h2>Enter E-mail Address</h2>
+         <input type = "text" id = "emailFromCal">
          <button id ='email' onclick="sendTheMail(); return false;">E-mail Me My Route!</button>
          <pre id="response"></pre>
        </div>  
