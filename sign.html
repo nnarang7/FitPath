@@ -354,7 +354,7 @@ function updateArrayFormat() {
 			updatedFormat.push(addressToAdd2);
 		} else if (currentAddress.length === 5) {
 			var addressToAdd = [currentAddress[0], currentAddress[1], currentAddress[3], currentAddress[4]];
-			updatedFormat.splice(updatedFormat.length - 2, 0, addressToAdd);
+			updatedFormat.splice(updatedFormat.length - 1, 0, addressToAdd);
 		}
 		console.log(updatedFormat);
 	}
