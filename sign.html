@@ -14,11 +14,10 @@
         <li><a id="options" href = "sign.html">Sign Up/Log in</a></li>
     </ul>
 </div> 
-<!--<div class="nav-wrapper">
+<div class="nav-wrapper">
 <h1 id ="intro">Pick a date!</h1>	
     <input type = "date" name ="date">
-    
-</div>-->
+</div>
 
 <div id = buttons>
     <h1 id ="intro1" >Sign in with Google now!</h1>
@@ -97,6 +96,7 @@
 		}
 		*/
 		function handleAuthClick(event) {
+			getDate();
 			gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
 			return false;
 		}
@@ -150,6 +150,9 @@
 					appendPre('No upcoming events found.');
 				}
 			});
+			
+			initMap(eventLocations, timeDifferences);
+			
 		}
 		function appendPre(message) {
 			var pre = document.getElementById('output');
@@ -179,7 +182,7 @@
 			    var date1_ms = d1.getTime();
 			    var date2_ms = d2.getTime();
 			    console.log("Time 1: " + date1_ms);
-			    console.log("Time 2: " + date2_ms);
+			    console.log("Time 2: " + date2_ms);f
 			    var difference_ms = date2_ms - date1_ms;
 			    console.log(((difference_ms / 1000) / 60));
 			    //Returns number of minutes
@@ -197,10 +200,22 @@ function openForm(){
     document.getElementById("guest_button").style.visibility = "hidden"; 
 }
 
+function getDate() {
+	var fullDate = document.getElementsByTagName('input')[0].value;
+	var dateSplit = fullDate.split("-");
+	year = dateSplit[0];
+	month = dateSplit[1];
+	day = dateSplit[2];
+}
+
 //add info for guest accounts
 function transferInfo() {
+	getDate();
 	console.log("running transfer function");
 	//console.log(document.getElementById("formLine").text);
+	var eventLocations = [];
+	var eventTimesStart = [];
+	var eventTimesEnd = [];
 	var timeDifferences = [];
 	var allFormLines = document.getElementsByClassName("formLine");
 	for (var i = 0; i < allFormLines.length; i++) {
@@ -226,6 +241,198 @@ function newButton(){
     var newForm = oldForm.cloneNode(true); 
     newForm.id = '';
     document.getElementById("formId").appendChild(newForm); 
+}
+
+var destOrdering = [];
+var goalMileage = 5.0;
+var totalMileage = 0;
+var timeArray = timeDifferences;
+var favoriteLocations = ['Philadelphia City Hall, Philadelphia, PA', '30th Street Station, Philadelphia, PA'];
+//destArray is eventLocations, timeArray is timeDifferences
+function initMap(destArray, timeArray) {
+  var bounds = new google.maps.LatLngBounds;
+  var markersArray = [];
+  //var destArray = ['Wells Fargo Center, Philadelphia, PA', '3901 Locust Walk, Philadelphia, PA'];
+
+  var service = new google.maps.DistanceMatrixService;
+  var geocoder = new google.maps.Geocoder;
+
+  for (var i = 0; i < destArray.length - 1; i++) {
+  	console.log("at " + destArray[i]);
+  	var currentIndex = i;
+	  service.getDistanceMatrix({
+	    origins: [destArray[i]],
+	    destinations: [destArray[i+1]],
+	    travelMode: google.maps.TravelMode.WALKING,
+	    unitSystem: google.maps.UnitSystem.IMPERIAL,
+	    avoidHighways: false,
+	    avoidTolls: false
+	  }, function(response, status) {
+	  	console.log(currentIndex);
+	    if (status !== google.maps.DistanceMatrixStatus.OK) {
+	      alert('Error was: ' + status);
+	    } else {
+	    	var stringDist = response.rows[0].elements[0].distance.text;
+	    	var numMiles = parseFloat((stringDist.split(" "))[0]);
+	    	console.log("just added " + numMiles + " miles");
+	    	totalMileage += numMiles;
+	    	console.log(getLatLng("Wells Fargo Center, Philadelphia, PA"));
+	    	console.log(destArray[currentIndex]);
+	    	console.log(getLatLng(destArray[currentIndex]));
+	    	console.log(getLatLng(destArray[currentIndex + 1]));
+	    	var infoToAdd = ["Names", destArray[currentIndex], destArray[currentIndex + 1], "starting time", "starting time + " + response.rows[0].elements[0].duration.text, numMiles];
+	    	console.log("adding this info");
+	    	console.log(infoToAdd);
+	    	destOrdering.push(infoToAdd);
+	      var originList = response.originAddresses;
+	      var destinationList = response.destinationAddresses;
+	      var outputDiv = document.getElementById('outputDiv');
+	      outputDiv.innerHTML = '';
+	      deleteMarkers(markersArray);
+	      for (var i = 0; i < originList.length; i++) {
+	        var results = response.rows[i].elements;
+	        for (var j = 0; j < results.length; j++) {
+	          outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
+	              ': ' + results[j].distance.text + ' in ' +
+	              results[j].duration.text + '<br>';
+	        }
+	      }
+	    }
+	    addFavorites(totalMileage, favoriteLocations);
+	  });
+	//console.log(destOrdering);
+	}
+	//console.log(destOrdering);
+	//addFavorites();
+	//} 
+	//so make a service call that picks one of these locations at random and compares it to all of the locations on the route
+	//first eliminate things if they take too much time, then record the one taking the max distance (record its address, the two points it would be in between, and the time it takes to get there)
+	//add the destination to the route (aka push it into the array) and see if the goal mileage has been reached yet
+	//if yes, return route to summer
+	//if no, remove that destination from favorite locations and pick a new random location and start over
+	//functionality to take care of adding in new locations
+}
+
+function addFavorites(startingMileage, favoriteLocations) {
+	console.log("current ordering");
+	console.log(destOrdering);
+	var milesToAdd = 0;
+	console.log("adding favorites now");
+	var service = new google.maps.DistanceMatrixService;
+	var currentIndex = Math.round(Math.random() * favoriteLocations.length - 0.5);
+	var currentLocation = favoriteLocations[currentIndex];
+	console.log("currently considering " + currentLocation);
+		var updatedArray = [];
+		updatedArray.push(destOrdering[0][1]);
+		updatedArray.push(destOrdering[0][2]);
+		for (var a = 1; a < destOrdering.length; a++) {
+			updatedArray.push(destOrdering[a][2]);
+		}
+
+	//while (totalMileage < goalMileage && favoriteLocations.length !== 0) {
+	  service.getDistanceMatrix({
+	    origins: [currentLocation],
+	    destinations: updatedArray,
+	    travelMode: google.maps.TravelMode.WALKING,
+	    unitSystem: google.maps.UnitSystem.IMPERIAL,
+	    avoidHighways: false,
+	    avoidTolls: false
+	  }, function(response, status) {
+	    if (status !== google.maps.DistanceMatrixStatus.OK) {
+	      alert('Error was: ' + status);
+	    } else {
+	    	console.log("this array");
+	    	var durationArray = response.rows[0].elements;
+	    	var maxDestName = "";
+	    	var maxDestPointA = "";
+	    	var maxDestPointB = "";
+	    	var maxDuration = 0;
+	    	var maxDist = 0;
+	    	var totalTimeTaken = 0;
+	    	for (var j = 0; j < durationArray.length - 1; j++) {
+	    		console.log("running");
+	    		var currentInfo = durationArray[j];
+	    		var nextDestInfo = durationArray[j + 1];
+	    		var stringTimeSplit = (currentInfo.duration.text).split(" ");
+	    		var nextDestTimeSplit = (nextDestInfo.duration.text).split(" ");
+	    		var oneWayDist = parseFloat(((currentInfo.distance.text).split(" "))[0]);
+	    		var comingBackDist = parseFloat(((nextDestInfo.distance.text).split(" "))[0]);
+	    		var timeTakenLeave = 0;
+	    		var timeTakenReturn = 0;
+	    		if (stringTimeSplit.length == 2) {
+	    			timeTakenLeave = parseInt(stringTimeSplit[0]);
+	    			console.log(timeTakenLeave);
+	    		} else if (stringTimeSplit.length == 4) {
+	    			timeTakenLeave += 60 * (parseInt(stringTimeSplit[0]));
+	    			timeTakenLeave += parseInt(stringTimeSplit[2]);
+	    			console.log(timeTakenLeave);
+	    		}
+
+	    		if (nextDestTimeSplit.length == 2) {
+	    			timeTakenReturn = parseInt(nextDestTimeSplit[0]);
+	    		} else if (nextDestTimeSplit.length == 4) {
+	    			timeTakenReturn += 60 * (parseInt(nextDestTimeSplit[0]));
+	    			timeTakenReturn += parseInt(nextDestTimeSplit[2]);
+	    		}
+	    		console.log(timeTakenReturn);
+
+	    		if (timeTakenLeave + timeTakenReturn < timeArray[j]) {
+	    			if (oneWayDist + comingBackDist > maxDist) {
+	    				maxDist = oneWayDist + comingBackDist;
+	    				maxDestName = response.originAddresses[0];
+	    				maxDestPointA = j;
+	    				maxDestPointB = j+1;
+	    				totalTimeTaken = timeTakenLeave + timeTakenReturn;
+	    				console.log(maxDist);
+	    				console.log(maxDestName);
+	    				console.log(maxDestPointA);
+	    				console.log(maxDestPointB);
+	    			}
+	    		}
+	    	}
+	    	console.log(maxDist);
+	    }
+	    console.log(maxDist);
+	    	if (maxDist !== 0 && maxDist !== undefined) {
+		    	var newInfoToAdd = [maxDestName, maxDestName, "starting time", "starting time + " + totalTimeTaken, maxDist];
+		    	destOrdering.push(newInfoToAdd);
+		    	console.log(newInfoToAdd);
+				milesToAdd = maxDist;
+				console.log(milesToAdd);
+				destOrdering.splice(maxDestPointB, 0, newInfoToAdd);
+	    	} 
+				for (var b = 0; b < favoriteLocations.length; b++) {
+					if (favoriteLocations[b].indexOf(maxDestName) > -1 || maxDestName.indexOf(favoriteLocations[b]) > -1) {
+						favoriteLocations.splice(b, 1);
+					}
+					console.log(favoriteLocations);
+				}
+	    		//destOrdering.splice(maxDestPointB, 0, newInfoToAdd); 
+	    		   	
+	    	console.log(destOrdering);
+	    	totalMileage += milesToAdd;
+	    	console.log(favoriteLocations.length);
+	    	if (totalMileage < goalMileage && favoriteLocations.length !== 0) {
+	    		console.log("adding new things");
+	    		addFavorites(totalMileage, favoriteLocations);
+	    	}
+	  });	
+	//}		
+}
+
+function getLatLng(address) {
+	var geocoder = new google.maps.Geocoder;
+	geocoder.geocode({'address': address}, function(results, status) {
+		console.log({lat: results[0].geometry.location.G, lng: results[0].geometry.location.K});
+		return ({lat: results[0].geometry.location.G, lng: results[0].geometry.location.K})
+	});
+}
+
+function deleteMarkers(markersArray) {
+  for (var i = 0; i < markersArray.length; i++) {
+    markersArray[i].setMap(null);
+  }
+  markersArray = [];
 }
 </script>
 
