@@ -299,8 +299,6 @@
 				'maxResults': 10,
 				'orderBy': 'startTime'
 			});
-			var emailFromCal = request.calenderId;
-			console.log("THE EMAIL SHOULD BE " + emailFromCal);
 			request.execute(function(resp) {
 				var events = resp.items;
 				//appendPre('Upcoming events:');
