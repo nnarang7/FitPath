@@ -21,7 +21,7 @@ function addDirections (dir) {
 // create a variable for the API call parameters
 var params = {
     "message": {
-        "from_email":"yutingyue514@gmail.com",
+        "from_email":"routeex.schedule@gmail.com",
         "to":[{"email": ""}],
         "subject": "Your RouteEx Schedule & Map",
         "html": "",
