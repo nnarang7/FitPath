@@ -163,10 +163,12 @@
 				else {
 					appendPre('No upcoming events found.');
 				}
+				
+				console.log(eventLocations);
+				console.log(timeDifferences);
+				initMap(eventLocations, timeDifferences);				
 			});
-			console.log(eventLocations);
-			console.log(timeDifferences);
-			initMap(eventLocations, timeDifferences);
+
 			
 		}
 		function appendPre(message) {
