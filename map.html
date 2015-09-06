@@ -69,6 +69,16 @@
 // This example displays a marker at the center of Australia.
 // When the user clicks the marker, an info window opens.
  //<button id="emailButton" onclick="sendEmail()">Send to me Email</button>
+ 
+ function popitup(url) {
+   newwindow = window.open(url, 'name', 'height=200,width=150');
+   if (window.focus) {
+    newwindow.focus();
+   }
+   return false;
+ }
+ 
+ 
 function initMap() {
   var i;
   var directionsDisplay = new google.maps.DirectionsRenderer;
