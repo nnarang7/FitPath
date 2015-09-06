@@ -39,7 +39,7 @@
       //reading terminal market
         ["bbb","Jon Huntsman Hall","2015-09-07T10:00:00-04:00","2015-09-07T11:00:00-04:00"],
         ["e","National Constitution Center","2015-09-07T15:00:00-04:00","2015-09-07T17:00:00-04:00"]]; */
-        var testEvents = localStorage.getItem("locations");
+        var testEvents = JSON.parse(localStorage.getItem("locations"));
         console.log(testEvents);
       var eventNum = testEvents.length;
       var user_email = "yyue@wharton.upenn.edu";
