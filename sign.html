@@ -318,13 +318,13 @@ function initFirstMap(destArray, timeArray) {
 	    }
 	    addFavorites(totalMileage, favoriteLocations);
 	    updateArrayFormat();
-	    console.log(updatedFormat);
+	    localStorage["locations"] = JSON.stringify(updatedFormat);
 	  });
 	//console.log(destOrdering);
 	}
 	console.log(updatedFormat);
 	console.log(JSON.stringify(updatedFormat));
-	localStorage["locations"] = JSON.stringify(updatedFormat);
+	//localStorage["locations"] = JSON.stringify(updatedFormat);
 	//window.open('map.html', '_self');
 	//endProcess();
 	//updateArrayFormat();
