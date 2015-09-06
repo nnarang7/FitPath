@@ -309,7 +309,10 @@ function initMap(destArray, timeArray) {
 	    		minutesToAddNums += 60 * parseInt(minutesToAdd[0]);
 	    		minutesToAddNums += parseInt(minutesToAdd[2]);
 	    	}
-	    	var infoToAdd = [destArray[currentIndex], destArray[currentIndex], destArray[currentIndex + 1], eventTimesStart[i], eventTimesStart[i] + minutesToAddNums * 60 * 100, numMiles];
+	    	var endTimeMS = eventTimesStart[i].getTime() + minutesToAddNums * 60 * 100;
+	    	var endTime = new Date(endTimeMS);
+	    	
+	    	var infoToAdd = [destArray[currentIndex], destArray[currentIndex], destArray[currentIndex + 1], eventTimesStart[i], endTime, numMiles];
 	    	console.log("adding this info");
 	    	console.log(infoToAdd);
 	    	destOrdering.push(infoToAdd);
