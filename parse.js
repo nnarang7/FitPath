@@ -1,5 +1,5 @@
   //"2015-09-07T17:00:00-04:00"
-function parse(dtObject)
+function parseDate(dtObject)
 		{			
 			if (dtObject.split(" ").length == 1)
 			{
