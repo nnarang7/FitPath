@@ -7,10 +7,12 @@
 
 <script>
 //Getting infomation of testEvents from Natasha 
-  var testEvents = [["aaa","chicago, il","8:00am","9:00am"],
-    ["bbb","Kansas City, MO","10:00am","11:00am"],
+  var testEvents = [["aaa","John Huntsman Hall","8:00am","9:00am"],
+    ["bbb","University of Pennsylvania","10:00am","11:00am"],
     ["ccc","Fifth Avenue","8:00pm","9:00pm"]];
     var eventNum = testEvents.length;
+   var user_email = "yyue@wharton.upenn.edu";
+  //var user_email = "viviange0830@gmail.com";
 </script>
 
 <!DOCTYPE html>
@@ -18,11 +20,10 @@
   <head>
     <script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
     <script type="text/javascript" src="js/send-email.js"></script>
-    <script type="text/javascript" src="js/params.js"></script>
     <script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Routex Map</title>
+    <title>RouteEx Map</title>
     <style>
       html, body {
         height: 100%;
@@ -36,14 +37,14 @@
   </head>
   <body>
     <div id = "emaildiv">
-      <button onclick="sendTheMail(); return false;">Send the Mail</button>
+      <button id ='email' onclick="sendTheMail(); return false;">Send the Mail</button>
       <pre id="response"></pre>
     </div>
-    <div id="directions_panel">
-      
+    <div id = "emailContent">
+      <div id="directions_panel"></div>
     </div>
-    <div id="map"></div>
- 
+      <div id="map"></div>
+  
 
 <script>
 // This example displays a marker at the center of Australia.
