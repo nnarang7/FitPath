@@ -293,7 +293,7 @@ function initFirstMap(destArray, timeArray) {
 
   for (m = 0; m < destArray.length - 1; m++) {
 	callServiceDistance(destArray[m], destArray[m+1], m);
-	//console.log(destOrdering);
+	console.log(destOrdering);
 }
 	    addFavorites(totalMileage, favoriteLocations);
 	    updateArrayFormat();
@@ -336,8 +336,8 @@ function callServiceDistance(origin, destination, m) {
 	    	var numMiles = parseFloat((stringDist.split(" "))[0]);
 	    	console.log("just added " + numMiles + " miles");
 	    	totalMileage += numMiles;
-	    	console.log("CURRENT INDEX " + currentIndex);
-	    	console.log(destArray[currentIndex]);
+	    	//console.log("CURRENT INDEX " + currentIndex);
+	    	//console.log(destArray[currentIndex]);
 	    	var minutesToAdd = response.rows[0].elements[0].duration.text.split(" ");
 	    	var minutesToAddNums = 0;
 	    	if (minutesToAdd.length === 2) {
