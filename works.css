@@ -1,22 +1,11 @@
 body {
-    text-align: left;
-    background-color: #90caf9;
+    text-align: center;
+    background-color: #eafbff;
     font-family:Verdana;
 }
 
-ul {
-    list-style-type: none; 
-    margin: 0; 
-    padding: 0; 
-    text-align: left;
-}
-
-li{
-    display: inline;
-}
-
-#nav-wrapper a:link {
-    text-decoration: none; 
+p{
+    font-size: 35px
 }
 
 a{
@@ -32,36 +21,40 @@ a:hover, a:active{
     
 }
 
-#options:link, #options:visited {
-    width: 200px;
-    color:white;
-    text-align: left;
-    padding: 4px;
-    font-size: 20px;
-}
-
-#options:hover, #options:active{
-    color:#bbdefb; 
-}
-
-#logo{
+h1{
     color: #64b5f6;
-    font-size: 50px; 
+    font-size: 60px; 
     font-weight: bold;
+    padding-bottom: 0px; 
+    margin-bottom: 0px; 
 }
 
-#nav-side{
-    line-height: 30px; 
-    height:500px; 
-    width:275px; 
-    float:right;
-    padding:5px; 
-    font-size: 25px;
-    color:#42a5f5; 
-    font-weight: 10;
-    position: fixed ;
-    right: 0;
+h2{
+    color:#5CB3FF; 
+    font-size: 25px; 
+    font-weight: bold; 
+    text-align: center; 
+    margin-top: 0px; 
+    padding-top: 0px;
+    padding-bottom: 10px; 
 }
+
+h3{
+    font-size: 20px; 
+    margin-bottom: 0px; 
+    padding-bottom: 0px; 
+    padding-top: 10px; 
+}
+
+
+#about{
+    text-align:center;
+    font-size: 18px;
+    font-weight: 100;
+    margin-top: 0px; 
+    padding-top: 0px; 
+}
+
 
 img:hover{
     opacity: 0.4;
