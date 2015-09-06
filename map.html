@@ -27,8 +27,17 @@
       }
     </style>
   </head>
-  <body>
-
+  <body>   
+  
+ <div id = "emailContent">
+      <div class="list boxes" id="directions_panel"></div>
+    </div>
+      <div class="map boxes" id="map"></div>
+    <div id = "emaildiv">
+      <button id ='email' onclick="sendTheMail(); return false;">E-mail Me My Route!</button>
+      <pre id="response"></pre>
+    </div>  
+    
     <script>
     var favorites = ["12TH AND ARCH STREETS PHILADELPHIA, PA 19107","Independence National Historical Park","Independence National Historical Park",
     "The Liberty Bell Center","Independence Hall","The Philadelphia Zoo","Longwood Gardens","The Franklin Institute","The Betsy Ross House",
@@ -52,20 +61,7 @@
         testEvents[i][3] = parse(testEvents[i][3]);
       }
       //var user_email = "viviange0830@gmail.com";
-    </script>
 
-
-    <div id = "emailContent">
-      <div class="list boxes" id="directions_panel"></div>
-    </div>
-      <div class="map boxes" id="map"></div>
-    <div id = "emaildiv">
-      <button id ='email' onclick="sendTheMail(); return false;">E-mail Me My Route!</button>
-      <pre id="response"></pre>
-    </div>  
-  
-
-<script>
 // This example displays a marker at the center of Australia.
 // When the user clicks the marker, an info window opens.
  //<button id="emailButton" onclick="sendEmail()">Send to me Email</button>
