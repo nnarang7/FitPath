@@ -321,7 +321,7 @@ function initFirstMap(destArray, timeArray) {
 	  });
 	//console.log(destOrdering);
 	}
-	localStorage.setItem("locations", updatedFormat);
+	localStorage.setItem("locations", JSON.stringify(updatedFormat));
 	window.open('map.html', '_self');
 	//endProcess();
 	//updateArrayFormat();
