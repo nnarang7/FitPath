@@ -292,18 +292,42 @@ function initFirstMap(destArray, timeArray) {
   var geocoder = new google.maps.Geocoder;
 
   for (m = 0; m < destArray.length - 1; m++) {
-  	console.log("at " + destArray[m]);
-  	var currentIndex = m;
-  	console.log(currentIndex);
+	callServiceDistance(destArray[m], destArray[m+1], m);
+	//console.log(destOrdering);
+}
+	    addFavorites(totalMileage, favoriteLocations);
+	    updateArrayFormat();
+	    localStorage["locations"] = JSON.stringify(updatedFormat);
+		console.log(updatedFormat);
+		console.log(JSON.stringify(updatedFormat));
+	//localStorage["locations"] = JSON.stringify(updatedFormat);
+	//window.open('goal_popup.html', '_blank', "height=150px, width=250px");
+	//popitup('goal_popup.html');
+	//window.open('map.html', '_self');
+	
+	//endProcess();
+	//updateArrayFormat();
+	//console.log(destOrdering);
+	//addFavorites();
+	//} 
+	//so make a service call that picks one of these locations at random and compares it to all of the locations on the route
+	//first eliminate things if they take too much time, then record the one taking the max distance (record its address, the two points it would be in between, and the time it takes to get there)
+	//add the destination to the route (aka push it into the array) and see if the goal mileage has been reached yet
+	//if yes, return route to summer
+	//if no, remove that destination from favorite locations and pick a new random location and start over
+	//functionality to take care of adding in new locations
+	console.log(destOrdering);
+}
+
+function callServiceDistance(origin, destination, m) {
 	  service.getDistanceMatrix({
-	    origins: [destArray[m]],
-	    destinations: [destArray[m+1]],
+	    origins: [origin],
+	    destinations: [destination],
 	    travelMode: google.maps.TravelMode.WALKING,
 	    unitSystem: google.maps.UnitSystem.IMPERIAL,
 	    avoidHighways: false,
 	    avoidTolls: false
 	  }, function(response, status) {
-	  	console.log(currentIndex);
 	    if (status !== google.maps.DistanceMatrixStatus.OK) {
 	      alert('Error was: ' + status);
 	    } else {
@@ -325,37 +349,13 @@ function initFirstMap(destArray, timeArray) {
 	    	console.log(endTimeMS);
 	    	var endTime = new Date(endTimeMS);
 	    	
-	    	var infoToAdd = [destArray[currentIndex], destArray[currentIndex], destArray[currentIndex + 1], new Date(eventTimesStart[m]), endTime, numMiles];
+	    	var infoToAdd = [destArray[currentIndex], origin, destination, new Date(eventTimesStart[m]), endTime, numMiles];
 	    	console.log("adding this info");
 	    	console.log(infoToAdd);
 	    	destOrdering.push(infoToAdd);
 	    }
-	    addFavorites(totalMileage, favoriteLocations);
-	    updateArrayFormat();
-	    localStorage["locations"] = JSON.stringify(updatedFormat);
-		console.log(updatedFormat);
-		console.log(JSON.stringify(updatedFormat));	    
-	  });
-	//console.log(destOrdering);
-	}
-
-	//localStorage["locations"] = JSON.stringify(updatedFormat);
-	//window.open('goal_popup.html', '_blank', "height=150px, width=250px");
-	//popitup('goal_popup.html');
-	//window.open('map.html', '_self');
-	
-	//endProcess();
-	//updateArrayFormat();
-	//console.log(destOrdering);
-	//addFavorites();
-	//} 
-	//so make a service call that picks one of these locations at random and compares it to all of the locations on the route
-	//first eliminate things if they take too much time, then record the one taking the max distance (record its address, the two points it would be in between, and the time it takes to get there)
-	//add the destination to the route (aka push it into the array) and see if the goal mileage has been reached yet
-	//if yes, return route to summer
-	//if no, remove that destination from favorite locations and pick a new random location and start over
-	//functionality to take care of adding in new locations
-	console.log(destOrdering);
+	    
+	  });	
 }
 
 function updateArrayFormat() {
