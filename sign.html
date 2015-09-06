@@ -112,8 +112,8 @@
 			console.log(date);
 			
 			var dateBegin = new Date(year, month - 1, date, 0, 0, 0);
-			var dateEnd = new Date();
-			dateEnd.setDate(dateBegin.getDate() + 1);
+			var dateEndMS = dateBegin.getTime() + 86400000;
+			var dateEnd = new Date(dateEndMS);
 			
 			console.log(dateBegin);
 			console.log(dateEnd);
