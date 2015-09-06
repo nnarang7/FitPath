@@ -302,23 +302,10 @@ function initMap(destArray, timeArray) {
 	    	console.log(destArray[currentIndex]);
 	    //	console.log(getLatLng(destArray[currentIndex]));
 	    //	console.log(getLatLng(destArray[currentIndex + 1]));
-	    	var infoToAdd = ["Names", destArray[currentIndex], destArray[currentIndex + 1], "starting time", "starting time + " + response.rows[0].elements[0].duration.text, numMiles];
+	    	var infoToAdd = [destArray[currentIndex], destArray[currentIndex], destArray[currentIndex + 1], eventTimesStart[i], eventTimesStart[i] + parseInt(response.rows[0].elements[0].duration.text) * 60 * 100, numMiles];
 	    	console.log("adding this info");
 	    	console.log(infoToAdd);
 	    	destOrdering.push(infoToAdd);
-	      var originList = response.originAddresses;
-	      var destinationList = response.destinationAddresses;
-	      var outputDiv = document.getElementById('outputDiv');
-	      outputDiv.innerHTML = '';
-	      deleteMarkers(markersArray);
-	      for (var i = 0; i < originList.length; i++) {
-	        var results = response.rows[i].elements;
-	        for (var j = 0; j < results.length; j++) {
-	          outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
-	              ': ' + results[j].distance.text + ' in ' +
-	              results[j].duration.text + '<br>';
-	        }
-	      }
 	    }
 	    addFavorites(totalMileage, favoriteLocations);
 	  });
