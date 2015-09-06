@@ -269,6 +269,35 @@ var totalMileage = 0;
 var timeArray = timeDifferences;
 var favoriteLocations = ['Philadelphia City Hall, Philadelphia, PA', '30th Street Station, Philadelphia, PA'];
 //destArray is eventLocations, timeArray is timeDifferences
+
+function buildResponseFor(i) {
+	return function (response, status) {
+		if (status == google.maps.DistanceMatrixStatus.OK) {
+				var stringDist = response.rows[0].elements[0].distance.text;
+			    	var numMiles = parseFloat((stringDist.split(" "))[0]);
+			    	console.log("just added " + numMiles + " miles");
+			    	totalMileage += numMiles;
+			    	console.log(destArray[i]);
+			    	var minutesToAdd = response.rows[0].elements[0].duration.text.split(" ");
+			    	var minutesToAddNums = 0;
+			    	if (minutesToAdd.length === 2) {
+			    		minutesToAddNums = parseInt(minutesToAdd[0]);
+			    	} else if (minutesToAdd.length === 4) {
+			    		minutesToAddNums += 60 * parseInt(minutesToAdd[0]);
+			    		minutesToAddNums += parseInt(minutesToAdd[2]);
+			    	}
+			    	var endTimeMS = (new Date(eventTimesStart[i])).getTime() + minutesToAddNums * 60 * 1000;
+			    	console.log(endTimeMS);
+			    	var endTime = new Date(endTimeMS);
+			    	
+			    	var infoToAdd = [destArray[i], destArray[i], destArray[i + 1], new Date(eventTimesStart[i]), endTime, numMiles];
+			    	console.log("adding this info");
+			    	console.log(infoToAdd);
+			    	destOrdering.push(infoToAdd);			
+		}
+	}
+}
+
 function initMap(destArray, timeArray) {
 	console.log("initializing map");
 	console.log(destArray);
@@ -289,38 +318,11 @@ function initMap(destArray, timeArray) {
 	    unitSystem: google.maps.UnitSystem.IMPERIAL,
 	    avoidHighways: false,
 	    avoidTolls: false
-	  }, function(response, status) {
-	  	console.log(currentIndex);
-	    if (status !== google.maps.DistanceMatrixStatus.OK) {
-	      alert('Error was: ' + status);
-	    } else {
-	    	var stringDist = response.rows[0].elements[0].distance.text;
-	    	var numMiles = parseFloat((stringDist.split(" "))[0]);
-	    	console.log("just added " + numMiles + " miles");
-	    	totalMileage += numMiles;
-	    	console.log(destArray[currentIndex]);
-	    	var minutesToAdd = response.rows[0].elements[0].duration.text.split(" ");
-	    	var minutesToAddNums = 0;
-	    	if (minutesToAdd.length === 2) {
-	    		minutesToAddNums = parseInt(minutesToAdd[0]);
-	    	} else if (minutesToAdd.length === 4) {
-	    		minutesToAddNums += 60 * parseInt(minutesToAdd[0]);
-	    		minutesToAddNums += parseInt(minutesToAdd[2]);
-	    	}
-	    	var endTimeMS = (new Date(eventTimesStart[i])).getTime() + minutesToAddNums * 60 * 1000;
-	    	console.log(endTimeMS);
-	    	var endTime = new Date(endTimeMS);
-	    	
-	    	var infoToAdd = [destArray[currentIndex], destArray[currentIndex], destArray[currentIndex + 1], new Date(eventTimesStart[i]), endTime, numMiles];
-	    	console.log("adding this info");
-	    	console.log(infoToAdd);
-	    	destOrdering.push(infoToAdd);
-	    }
-	    addFavorites(totalMileage, favoriteLocations);
-	    updateArrayFormat();
-	  });
+	  }, buildResponseFor(i));
 	//console.log(destOrdering);
 	}
+	    addFavorites(totalMileage, favoriteLocations);
+	    updateArrayFormat();	
 	window.open('map.html', '_self');
 	//endProcess();
 	//updateArrayFormat();
